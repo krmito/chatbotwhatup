@@ -23,11 +23,11 @@ let chatId: string;
 let fromMe: boolean;
 let horasDisponibles = [
     {
-        1: "8:00",
-        2: "9:00",
-        3: "3:30",
-        4: "4:20",
-        5: "cancelar"
+        1: "Martes",
+        2: "Miercoles",
+        3: "Jueves",
+        4: "Viernes",
+        5: "Cancelar"
     }
 ];
 app.use(bodyParser.json());
@@ -141,14 +141,14 @@ function subFlow() {
             }
             if (element.state == 'eligeCita1') {
                 
-                horasDisponibles.forEach((element, index) => {
+                horasDisponibles.forEach((element, indice) => {
                     console.log(index);
-                    console.log(element);
+                    console.log(element[1]);
                     
                     if (Number(index + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, element);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, element[1]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
