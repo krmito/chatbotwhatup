@@ -17,8 +17,8 @@ let saludosInicial: Array<string> = [];
 let citaInicial: Array<string> = [];
 let tipoDocumento: Array<string> = [];
 let input: string = "";
-let diasDisponibles:Array<string> = [];
-let horasDisponibles:Array<string> = [];;
+let diasDisponibles: Array<string> = [];
+let horasDisponibles: Array<string> = [];;
 let senderName: string;
 let chatId: string;
 let fromMe: boolean;
@@ -29,7 +29,7 @@ app.post('/my_webhook_url2', (req, res) => {
     data = req.body; // New messages in the "body" variable
 
     console.log('ELEMENT', data);
-    utilities.functionWithCallBack(checkMessega(), 1000).then(res  => {
+    utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
         subFlow();
     });
 
@@ -48,9 +48,9 @@ function checkMessega() {
 
     citaInicial = ["cita", "citas"];
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
-    tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar","1","2","3","4"];
-    diasDisponibles = ["martes","miercoles","jueves","viernes","cancelar","1","2","3","4","5"];
-    horasDisponibles = ["8:00", "9:00", "3:30", "4:20","cancelar","1","2","3","4","5"];
+    tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar", "1", "2", "3", "4"];
+    diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar", "1", "2", "3", "4", "5"];
+    horasDisponibles = ["8:00", "9:00", "3:30", "4:20", "cancelar", "1", "2", "3", "4", "5"];
     console.log('users', users);
 
     if (users.find(userValue => userValue.chatId == chatId)) {
@@ -75,7 +75,6 @@ function checkMessega() {
     } else {
         if (saludosInicial.find(valueSaludo2 => valueSaludo2 == input)) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
-            user = new User();
             user = new User(chatId, message, 'saludoInicial')
             sendMessage(user);
             users.push(user);
@@ -85,12 +84,12 @@ function checkMessega() {
 
 function subFlow() {
     users.forEach((element, index) => {
+        console.log("Estado: " , element.state);
         if (!fromMe) {
             if (element.state == 'citaInicial') {
                 if (tipoDocumento.find(response => utilities.isContain(input, response))) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                    user = new User();
                     user = new User(chatId, message, 'citasSubFlow1')
                     sendMessage(user);
                     users.push(user);
@@ -99,19 +98,15 @@ function subFlow() {
             if (element.state == 'citasSubFlow1' || element.state == 'docInvalido') {
                 console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
-                    documentNumber = parseInt(input); 
+                    documentNumber = parseInt(input);
                     console.log('Cant tell man');
-                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                    user = new User();
                     user = new User(chatId, message, 'citasSubFlow2')
                     sendMessage(user);
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
-                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
-                    user = new User();
                     user = new User(chatId, message, 'docInvalido');
                     sendMessage(user);
                     users.push(user);
@@ -119,11 +114,7 @@ function subFlow() {
             }
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                    /*                     message = messagesToSend.newMessage('citasSubFlow3', element.senderName);
-                                        user = new User(chatId, message, 'saludoInicial');
-                     */
                     documentDate = input;
-                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('eligeCita1', element.senderName);
                     user = new User(chatId, message, 'eligeCita1');
                     sendMessage(user);
@@ -173,5 +164,5 @@ let server = app.listen(process.env.PORT, function () {
 });
 
 
-	
-	
+
+

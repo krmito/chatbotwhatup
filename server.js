@@ -69,7 +69,6 @@ function checkMessega() {
     else {
         if (saludosInicial.find(function (valueSaludo2) { return valueSaludo2 == input; })) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
-            user = new User_1.User();
             user = new User_1.User(chatId, message, 'saludoInicial');
             sendMessage(user);
             users.push(user);
@@ -78,12 +77,12 @@ function checkMessega() {
 }
 function subFlow() {
     users.forEach(function (element, index) {
+        console.log("Estado: ", element.state);
         if (!fromMe) {
             if (element.state == 'citaInicial') {
                 if (tipoDocumento.find(function (response) { return utilities.isContain(input, response); })) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                    user = new User_1.User();
                     user = new User_1.User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
@@ -94,18 +93,14 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
                     documentNumber = parseInt(input);
                     console.log('Cant tell man');
-                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                    user = new User_1.User();
                     user = new User_1.User(chatId, message, 'citasSubFlow2');
                     sendMessage(user);
                     users.push(user);
                 }
                 else {
                     console.log('HEY BRO!!!!!');
-                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
-                    user = new User_1.User();
                     user = new User_1.User(chatId, message, 'docInvalido');
                     sendMessage(user);
                     users.push(user);
@@ -113,11 +108,7 @@ function subFlow() {
             }
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                    /*                     message = messagesToSend.newMessage('citasSubFlow3', element.senderName);
-                                        user = new User(chatId, message, 'saludoInicial');
-                     */
                     documentDate = input;
-                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('eligeCita1', element.senderName);
                     user = new User_1.User(chatId, message, 'eligeCita1');
                     sendMessage(user);
