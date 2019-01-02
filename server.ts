@@ -6,7 +6,7 @@ let messagesToSend = require("./classes/messagesToSend");
 let utilities = require("./classes/utilities");
 
 let app = express();
-let url: string = 'https://eu17.chat-api.com/instance20416/sendMessage?token=cd5k6c9y2tynp1wa';
+let url: string = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
 let users: Array<any> = [];
 let user: User;
 let data: any;
@@ -25,7 +25,7 @@ let fromMe: boolean;
 
 app.use(bodyParser.json());
 
-app.post('my_webhook_url2', (req, res) => {
+app.post('/my_webhook_url', (req, res) => {
     data = req.body; // New messages in the "body" variable
 
     console.log('ELEMENT', data);
@@ -47,7 +47,7 @@ function checkMessega() {
     });
 
     citaInicial = ["cita", "citas"];
-    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo","ole"];
+    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar","1","2","3","4"];
     diasDisponibles = ["martes","miercoles","jueves","viernes","cancelar","1","2","3","4","5"];
     horasDisponibles = ["8:00", "9:00", "3:30", "4:20","cancelar","1","2","3","4","5"];
@@ -55,7 +55,6 @@ function checkMessega() {
 
     if (users.find(userValue => userValue.chatId == chatId)) {
         if (!fromMe) {
-
             if (saludosInicial.find(valueSaludo1 => valueSaludo1 == input)) {
                 message = messagesToSend.newMessage('saludoInicial', senderName);
                 user = new User(chatId, message, 'saludoInicial')
@@ -86,7 +85,6 @@ function subFlow() {
     users.forEach((element, index) => {
         if (!fromMe) {
             if (element.state == 'citaInicial') {
-                console.log('this is happening');
                 if (tipoDocumento.find(response => utilities.isContain(input, response))) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
@@ -106,7 +104,7 @@ function subFlow() {
                     users.push(user);
                 } else if (/([a-zA-Z])/g) {
                     console.log('HEY BRO!!!!!');
-                    message = messagesToSend.sendChangedFlujo('docInvalido', element.senderName);
+                    message = messagesToSend.newMessage('docInvalido', element.senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
@@ -114,35 +112,35 @@ function subFlow() {
             }
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                    /*                     message = messagesToSend.sendChangedFlujo('citasSubFlow3', element.senderName);
+                    /*                     message = messagesToSend.newMessage('citasSubFlow3', element.senderName);
                                         user = new User(chatId, message, 'saludoInicial');
                      */
                     documentDate = input;
-                    message = messagesToSend.sendChangedFlujo('eligeCita1', element.senderName);
+                    message = messagesToSend.newMessage('eligeCita1', element.senderName);
                     user = new User(chatId, message, 'eligeCita1');
                     sendMessage(user);
                     users.push(user);
                 } else {
-                    message = messagesToSend.sendChangedFlujo('docInvalidoFecha', element.senderName);
+                    message = messagesToSend.newMessage('docInvalidoFecha', element.senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
                 }
             }
             /* if (element.state == 'eligeCita1') {
-                message = messagesToSend.sendChangedFlujo('eligeCita2', element.senderName);
+                message = messagesToSend.newMessage('eligeCita2', element.senderName);
                 user = new User(chatId, message, 'eligeCita2');
                 sendMessage(user);
                 users.push(user);
             }
             if (element.state == 'eligeCita2') {
-                message = messagesToSend.sendChangedFlujo('eligeCita3', element.senderName);
+                message = messagesToSend.newMessage('eligeCita3', element.senderName);
                 user = new User(chatId, message, 'eligeCita3');
                 sendMessage(user);
                 users.push(user);
             }
             if (element.state == 'eligeCita3') {
-                message = messagesToSend.sendChangedFlujo('eligeCita4', element.senderName);
+                message = messagesToSend.newMessage('eligeCita4', element.senderName);
                 user = new User(chatId, message, 'eligeCita4');
                 sendMessage(user);
                 users.push(user);
@@ -165,3 +163,7 @@ let server = app.listen(process.env.PORT, function () {
     let port = server.address().port;
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
+
+
+	
+	
