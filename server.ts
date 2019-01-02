@@ -101,6 +101,7 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
                     documentNumber = parseInt(input); 
                     console.log('Cant tell man');
+                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = new User();
                     user = new User(chatId, message, 'citasSubFlow2')
@@ -108,6 +109,7 @@ function subFlow() {
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
+                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
                     user = new User();
                     user = new User(chatId, message, 'docInvalido');
@@ -121,6 +123,7 @@ function subFlow() {
                                         user = new User(chatId, message, 'saludoInicial');
                      */
                     documentDate = input;
+                    message = messagesToSend.newMessage();
                     message = messagesToSend.newMessage('eligeCita1', element.senderName);
                     user = new User(chatId, message, 'eligeCita1');
                     sendMessage(user);
