@@ -50,7 +50,16 @@ function checkMessega() {
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar", "1", "2", "3", "4"];
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar", "1", "2", "3", "4", "5"];
-    horasDisponibles = ["8:00", "9:00", "3:30", "4:20", "cancelar", "1", "2", "3", "4", "5"];
+    let horasDisponibles = [
+        {
+          "1":"8:00",
+          "2":"9:00",
+          "3":"3:30",
+          "4":"4:20",
+          "5":"cancelar"
+        }
+    ];
+    console.log(horasDisponibles);
     console.log('users', users);
 
     if (users.find(userValue => userValue.chatId == chatId)) {
@@ -108,7 +117,7 @@ function subFlow() {
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
-                    message = messagesToSend.newMessage('citasSubFlow1', element.senderName);
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
@@ -118,24 +127,25 @@ function subFlow() {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
                     users.splice(index, 1);
                     documentDate = input;
-                    message = messagesToSend.newMessage('eligeCita1', element.senderName);
+                    message = messagesToSend.newMessage('eligeCita1', senderName);
                     user = new User(chatId, message, 'eligeCita1');
                     
                     sendMessage(user);
                     users.push(user);
                 } else {
-                    message = messagesToSend.newMessage('docInvalidoFecha', element.senderName);
+                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
                 }
             }
-            /* if (element.state == 'eligeCita1') {
+             if (element.state == 'eligeCita1') {
                 message = messagesToSend.newMessage('eligeCita2', element.senderName);
                 user = new User(chatId, message, 'eligeCita2');
                 sendMessage(user);
                 users.push(user);
             }
+            
             if (element.state == 'eligeCita2') {
                 message = messagesToSend.newMessage('eligeCita3', element.senderName);
                 user = new User(chatId, message, 'eligeCita3');
