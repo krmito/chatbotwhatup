@@ -166,36 +166,23 @@ function subFlow() {
                     const element = DiasDisponibles[indices];
                     console.log(indices);
                     console.log(DiasDisponibles[indices]);
-                    if (Number(indices) == Number(input)) {
+                    if (Number(indices - 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices - 1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
                     }
                 }
-                /*                DiasDisponibles.forEach((element, indice) => {
-                                   console.log(indice + 1);
-                                   console.log(DiasDisponibles[indice]);
-               
-                                   if (Number(indice + 1) == Number(input)) {
-                                       console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                                       users.splice(index, 1);
-                                       message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indice +1]);
-                                       user = new User(chatId, message, 'eligeCita2');
-                                       sendMessage(user);
-                                       users.push(user);
-                                   }
-                               }); */
             }
 
             if (element.state == 'eligeCita2') {
                 horasDisponibles.forEach((element, indice2) => {
 
-                    if (Number(indice2 + 1) == Number(input)) {
+                    if (Number(indice2 - 1) == Number(input)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 + 1]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
                         user = new User(chatId, message, 'eligeCita3');
                         sendMessage(user);
                         users.push(user);

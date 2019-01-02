@@ -50,7 +50,7 @@ let messagesToSend = {
 `;
         break;
       case 'eligeCita2':
-        mensaje = `${userName} estas son las horas en que tenemos citas disponibles para el ${hora}
+        mensaje = `${userName} estas son las horas en que tenemos citas disponibles para el ${dia}
 *1. 8:00* 
 *2. 9:00* 
 *3. 3:30* 
