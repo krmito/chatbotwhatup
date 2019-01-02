@@ -21,7 +21,7 @@ let diasDisponibles: Array<string> = [];
 let senderName: string;
 let chatId: string;
 let fromMe: boolean;
-let horasDisponibles = [
+let DiasDisponibles = [
     {
         1: "Martes",
         2: "Miercoles",
@@ -30,6 +30,16 @@ let horasDisponibles = [
         5: "Cancelar"
     }
 ];
+
+let horasDisponibles = [
+    {
+        "1": "8:00",
+        "2": "9:00",
+        "3": "3:30",
+        "4": "4:20",
+        "5": "cancelar"
+    }
+]
 app.use(bodyParser.json());
 
 app.post('/my_webhook_url2', (req, res) => {
@@ -57,7 +67,7 @@ function checkMessega() {
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
- 
+
     console.log('users', users);
 
     if (users.find(userValue => userValue.chatId == chatId)) {
@@ -140,11 +150,11 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
-                
-                horasDisponibles.forEach((element, indice) => {
+
+                DiasDisponibles.forEach((element, indice) => {
                     console.log(indice);
                     console.log(element[1]);
-                    
+
                     if (Number(indice + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
@@ -157,13 +167,20 @@ function subFlow() {
 
             }
 
-            /*if (element.state == 'eligeCita2') {
-                message = messagesToSend.newMessage('eligeCita3', element.senderName);
-                user = new User(chatId, message, 'eligeCita3');
-                sendMessage(user);
-                users.push(user);
+            if (element.state == 'eligeCita2') {
+                horasDisponibles.forEach((element, indice2) => {
+
+                    if (Number(indice2 + 1) == Number(input)) {
+                        users.splice(index, 1);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, element[1]);
+                        user = new User(chatId, message, 'eligeCita3');
+                        sendMessage(user);
+                        users.push(user);
+                    }
+
+                });
             }
-            if (element.state == 'eligeCita3') {
+            /*if (element.state == 'eligeCita3') {
                 message = messagesToSend.newMessage('eligeCita4', element.senderName);
                 user = new User(chatId, message, 'eligeCita4');
                 sendMessage(user);

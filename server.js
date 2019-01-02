@@ -22,13 +22,22 @@ var diasDisponibles = [];
 var senderName;
 var chatId;
 var fromMe;
-var horasDisponibles = [
+var DiasDisponibles = [
     {
         1: "Martes",
         2: "Miercoles",
         3: "Jueves",
         4: "Viernes",
         5: "Cancelar"
+    }
+];
+var horasDisponibles = [
+    {
+        "1": "8:00",
+        "2": "9:00",
+        "3": "3:30",
+        "4": "4:20",
+        "5": "cancelar"
     }
 ];
 app.use(bodyParser.json());
@@ -133,7 +142,7 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
-                horasDisponibles.forEach(function (element, indice) {
+                DiasDisponibles.forEach(function (element, indice) {
                     console.log(indice);
                     console.log(element[1]);
                     if (Number(indice + 1) == Number(input)) {
@@ -146,13 +155,18 @@ function subFlow() {
                     }
                 });
             }
-            /*if (element.state == 'eligeCita2') {
-                message = messagesToSend.newMessage('eligeCita3', element.senderName);
-                user = new User(chatId, message, 'eligeCita3');
-                sendMessage(user);
-                users.push(user);
+            if (element.state == 'eligeCita2') {
+                horasDisponibles.forEach(function (element, indice2) {
+                    if (Number(indice2 + 1) == Number(input)) {
+                        users.splice(index, 1);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, element[1]);
+                        user = new User_1.User(chatId, message, 'eligeCita3');
+                        sendMessage(user);
+                        users.push(user);
+                    }
+                });
             }
-            if (element.state == 'eligeCita3') {
+            /*if (element.state == 'eligeCita3') {
                 message = messagesToSend.newMessage('eligeCita4', element.senderName);
                 user = new User(chatId, message, 'eligeCita4');
                 sendMessage(user);
