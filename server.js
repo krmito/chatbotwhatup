@@ -7,7 +7,7 @@ var User_1 = require("./classes/User");
 var messagesToSend = require("./classes/messagesToSend");
 var utilities = require("./classes/utilities");
 var app = express();
-var url = 'https://eu14.chat-api.com/instance20409/sendMessage?token=ajj37yogwlzo2wan';
+var url = 'https://eu14.chat-api.com/instance20416/sendMessage?token=cd5k6c9y2tynp1wa';
 var users = [];
 var user;
 var data;
@@ -25,7 +25,7 @@ var senderName;
 var chatId;
 var fromMe;
 app.use(bodyParser.json());
-app.post(' ', function (req, res) {
+app.post('my_webhook_url', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
