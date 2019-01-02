@@ -115,6 +115,7 @@ function subFlow() {
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
+                    users.splice(index, 1);
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
@@ -131,6 +132,7 @@ function subFlow() {
                     sendMessage(user);
                     users.push(user);
                 } else {
+                    users.splice(index, 1);
                     message = messagesToSend.newMessage('docInvalidoFecha', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
@@ -138,13 +140,13 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
-                users.splice(index, 1);
+                
                 horasDisponibles.forEach((element, index) => {
                     console.log(index);
                     
                     if (Number(index + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                        
+                        users.splice(index, 1);
                         message = messagesToSend.newMessage('eligeCita2', senderName, null, element);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
