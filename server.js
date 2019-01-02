@@ -25,7 +25,7 @@ var senderName;
 var chatId;
 var fromMe;
 app.use(bodyParser.json());
-app.post('/my_webhook_url', function (req, res) {
+app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
