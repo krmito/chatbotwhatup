@@ -148,7 +148,7 @@ function subFlow() {
                 horasDisponibles.forEach((element, index) => {
                     console.log(index);
                     
-                    if ((index + 1) == Number(input)) {
+                    if (Number(index + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         
                         message = messagesToSend.newMessage('eligeCita2', senderName, null, element);

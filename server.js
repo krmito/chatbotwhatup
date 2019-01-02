@@ -139,7 +139,7 @@ function subFlow() {
             if (element.state == 'eligeCita1') {
                 horasDisponibles.forEach(function (element, index) {
                     console.log(index);
-                    if ((index + 1) == Number(input)) {
+                    if (Number(index + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         message = messagesToSend.newMessage('eligeCita2', senderName, null, element);
                         user = new User_1.User(chatId, message, 'eligeCita2');
