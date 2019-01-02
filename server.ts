@@ -52,11 +52,11 @@ function checkMessega() {
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar", "1", "2", "3", "4", "5"];
     let horasDisponibles = [
         {
-          "1":"8:00",
-          "2":"9:00",
-          "3":"3:30",
-          "4":"4:20",
-          "5":"cancelar"
+          1:"8:00",
+          2:"9:00",
+          3:"3:30",
+          4:"4:20",
+          5:"cancelar"
         }
     ];
     console.log(horasDisponibles);
@@ -146,7 +146,7 @@ function subFlow() {
                 users.push(user);
             }
             
-            if (element.state == 'eligeCita2') {
+            /*if (element.state == 'eligeCita2') {
                 message = messagesToSend.newMessage('eligeCita3', element.senderName);
                 user = new User(chatId, message, 'eligeCita3');
                 sendMessage(user);

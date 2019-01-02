@@ -47,11 +47,11 @@ function checkMessega() {
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar", "1", "2", "3", "4", "5"];
     var horasDisponibles = [
         {
-            "1": "8:00",
-            "2": "9:00",
-            "3": "3:30",
-            "4": "4:20",
-            "5": "cancelar"
+            1: "8:00",
+            2: "9:00",
+            3: "3:30",
+            4: "4:20",
+            5: "cancelar"
         }
     ];
     console.log(horasDisponibles);
@@ -139,19 +139,18 @@ function subFlow() {
                 sendMessage(user);
                 users.push(user);
             }
-            if (element.state == 'eligeCita2') {
+            /*if (element.state == 'eligeCita2') {
                 message = messagesToSend.newMessage('eligeCita3', element.senderName);
-                user = new User_1.User(chatId, message, 'eligeCita3');
+                user = new User(chatId, message, 'eligeCita3');
                 sendMessage(user);
                 users.push(user);
             }
             if (element.state == 'eligeCita3') {
                 message = messagesToSend.newMessage('eligeCita4', element.senderName);
-                user = new User_1.User(chatId, message, 'eligeCita4');
+                user = new User(chatId, message, 'eligeCita4');
                 sendMessage(user);
                 users.push(user);
-            }
-             * /;
+            } */
         }
     });
 }
