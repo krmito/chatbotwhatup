@@ -29,7 +29,7 @@ app.post('/my_webhook_url2', (req, res) => {
     data = req.body; // New messages in the "body" variable
 
     console.log('ELEMENT', data);
-    utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
+    utilities.functionWithCallBack(checkMessega(), 1000).then(res  => {
         subFlow();
     });
 
