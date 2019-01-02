@@ -141,10 +141,10 @@ function subFlow() {
                     var element_1 = DiasDisponibles[indices];
                     console.log(indices);
                     console.log(DiasDisponibles[indices]);
-                    if (Number(indices - 1) == Number(input)) {
+                    if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices]);
                         user = new User_1.User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
@@ -153,9 +153,9 @@ function subFlow() {
             }
             if (element.state == 'eligeCita2') {
                 horasDisponibles.forEach(function (element, indice2) {
-                    if (Number(indice2 - 2) == Number(input)) {
+                    if (Number(indice2) == Number(input)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 2]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2]);
                         user = new User_1.User(chatId, message, 'eligeCita3');
                         sendMessage(user);
                         users.push(user);
