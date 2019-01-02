@@ -164,12 +164,12 @@ function subFlow() {
 
                 for (let indices = 0; indices < DiasDisponibles.length; indices++) {
                     const element = DiasDisponibles[indices];
-                    console.log(indices + 1);
-                    console.log(DiasDisponibles[indices + 1]);
+                    console.log(indices);
+                    console.log(DiasDisponibles[indices]);
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices - 1]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
