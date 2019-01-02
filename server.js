@@ -135,6 +135,7 @@ function subFlow() {
             if (element.state == 'eligeCita1') {
                 horasDisponibles.forEach(function (element, index) {
                     console.log(index);
+                    console.log(element);
                     if (Number(index + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);

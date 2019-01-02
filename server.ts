@@ -143,6 +143,7 @@ function subFlow() {
                 
                 horasDisponibles.forEach((element, index) => {
                     console.log(index);
+                    console.log(element);
                     
                     if (Number(index + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
