@@ -146,7 +146,11 @@ function subFlow() {
             }
             if (element.state == 'eligeCita1') {
                 horasDisponibles.forEach((element, index) => {
+                    console.log(index);
+                    
                     if ((index + 1) == Number(input)) {
+                        console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
+                        
                         message = messagesToSend.newMessage('eligeCita2', senderName, null, element);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
