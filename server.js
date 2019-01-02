@@ -95,6 +95,7 @@ function subFlow() {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = new User_1.User(chatId, message, 'citasSubFlow2');
+                    element.state == 'citasSubFlow2';
                     sendMessage(user);
                     users.push(user);
                 }
@@ -102,6 +103,7 @@ function subFlow() {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('citasSubFlow1', element.senderName);
                     user = new User_1.User(chatId, message, 'citasSubFlow1');
+                    element.state == 'citasSubFlow1';
                     sendMessage(user);
                     users.push(user);
                 }
@@ -111,12 +113,14 @@ function subFlow() {
                     documentDate = input;
                     message = messagesToSend.newMessage('eligeCita1', element.senderName);
                     user = new User_1.User(chatId, message, 'eligeCita1');
+                    element.state == 'eligeCita1';
                     sendMessage(user);
                     users.push(user);
                 }
                 else {
                     message = messagesToSend.newMessage('docInvalidoFecha', element.senderName);
                     user = new User_1.User(chatId, message, 'citasSubFlow1');
+                    element.state == 'citasSubFlow1';
                     sendMessage(user);
                     users.push(user);
                 }
