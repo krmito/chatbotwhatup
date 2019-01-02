@@ -173,7 +173,7 @@ function subFlow() {
                     if (Number(indice + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[2]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indice +1]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
@@ -186,7 +186,7 @@ function subFlow() {
 
                     if (Number(indice2 + 1) == Number(input)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 + 1]);
                         user = new User(chatId, message, 'eligeCita3');
                         sendMessage(user);
                         users.push(user);
