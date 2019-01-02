@@ -104,9 +104,9 @@ function subFlow() {
                 } else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
-                    /*user = new User(chatId, message, 'citasSubFlow1');
+                    user = new User(chatId, message, 'docInvalido');
                     sendMessage(user);
-                    users.push(user);*/
+                    users.push(user);
                 }
             }
             if (element.state == 'citasSubFlow2') {
