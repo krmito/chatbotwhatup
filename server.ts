@@ -7,7 +7,7 @@ let utilities = require("./classes/utilities");
 
 
 export interface MyHomeBrewery {
-    dias : Array<Dias>;
+    dias: Array<Dias>;
     horas: Array<Horas>;
 }
 
@@ -38,20 +38,18 @@ let senderName: string;
 let chatId: string;
 let fromMe: boolean;
 let DiasDisponibles = [
-    {1: "Martes"},
-    {2: "Miercoles"},
-    {3: "Jueves"},
-    {4: "Viernes"},
+    "Martes",
+    "Miercoles",
+    "Jueves",
+    "Viernes",
 ];
 
 let horasDisponibles = [
-    {
-        "1": "8:00",
-        "2": "9:00",
-        "3": "3:30",
-        "4": "4:20",
-        "5": "cancelar"
-    }
+    "8:00",
+    "9:00",
+    "3:30",
+    "4:20",
+    "cancelar"
 ]
 app.use(bodyParser.json());
 
@@ -167,29 +165,29 @@ function subFlow() {
                 for (let indices = 0; indices < DiasDisponibles.length; indices++) {
                     const element = DiasDisponibles[indices];
                     console.log(indices + 1);
-                    console.log(DiasDisponibles[indices]);
+                    console.log(DiasDisponibles[indices + 1]);
                     if (Number(indices + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices +1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices + 1]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
                     }
                 }
- /*                DiasDisponibles.forEach((element, indice) => {
-                    console.log(indice + 1);
-                    console.log(DiasDisponibles[indice]);
-
-                    if (Number(indice + 1) == Number(input)) {
-                        console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                        users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indice +1]);
-                        user = new User(chatId, message, 'eligeCita2');
-                        sendMessage(user);
-                        users.push(user);
-                    }
-                }); */
+                /*                DiasDisponibles.forEach((element, indice) => {
+                                   console.log(indice + 1);
+                                   console.log(DiasDisponibles[indice]);
+               
+                                   if (Number(indice + 1) == Number(input)) {
+                                       console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
+                                       users.splice(index, 1);
+                                       message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indice +1]);
+                                       user = new User(chatId, message, 'eligeCita2');
+                                       sendMessage(user);
+                                       users.push(user);
+                                   }
+                               }); */
             }
 
             if (element.state == 'eligeCita2') {
@@ -212,7 +210,7 @@ function subFlow() {
                     user = new User(chatId, message, 'eligeCita5');
                     sendMessage(user);
                     users.push(user);
-                } else if(Number(input.match(/([^a-zA-Z])/g)) == 2){
+                } else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
                     message = messagesToSend.newMessage('eligeCita1', senderName);
                     user = new User(chatId, message, 'eligeCita1');
                     sendMessage(user);

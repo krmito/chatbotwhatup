@@ -23,19 +23,17 @@ var senderName;
 var chatId;
 var fromMe;
 var DiasDisponibles = [
-    { 1: "Martes" },
-    { 2: "Miercoles" },
-    { 3: "Jueves" },
-    { 4: "Viernes" },
+    "Martes",
+    "Miercoles",
+    "Jueves",
+    "Viernes",
 ];
 var horasDisponibles = [
-    {
-        "1": "8:00",
-        "2": "9:00",
-        "3": "3:30",
-        "4": "4:20",
-        "5": "cancelar"
-    }
+    "8:00",
+    "9:00",
+    "3:30",
+    "4:20",
+    "cancelar"
 ];
 app.use(bodyParser.json());
 app.post('/my_webhook_url2', function (req, res) {
@@ -142,7 +140,7 @@ function subFlow() {
                 for (var indices = 0; indices < DiasDisponibles.length; indices++) {
                     var element_1 = DiasDisponibles[indices];
                     console.log(indices + 1);
-                    console.log(DiasDisponibles[indices]);
+                    console.log(DiasDisponibles[indices + 1]);
                     if (Number(indices + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
