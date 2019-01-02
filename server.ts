@@ -50,13 +50,13 @@ function checkMessega() {
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar", "1", "2", "3", "4"];
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar", "1", "2", "3", "4", "5"];
-    let horasDisponibles = [
+    var horasDisponibles = [
         {
-          1:"8:00",
-          2:"9:00",
-          3:"3:30",
-          4:"4:20",
-          5:"cancelar"
+          1: "8:00",
+          2: "9:00",
+          3: "3:30",
+          4: "4:20",
+          5: "cancelar"
         }
     ];
     console.log(horasDisponibles);
@@ -140,8 +140,10 @@ function subFlow() {
                 }
             }
              if (element.state == 'eligeCita1') {
-                horasDisponibles.forEach((element,index) => {
-                    console.log("Element: " , element , " " , " Input: " , input);
+                horasDisponibles.forEach(element => {
+                    console.log(element);
+                    
+                    //console.log("Element: " , element, " " , " Input: " , input);
                     
                 });
                 message = messagesToSend.newMessage('eligeCita2', element.senderName);

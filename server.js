@@ -134,8 +134,9 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
-                horasDisponibles.forEach(function (element, index) {
-                    console.log("Element: ", element, " ", " Input: ", input);
+                horasDisponibles.forEach(function (element) {
+                    console.log(element);
+                    //console.log("Element: " , element, " " , " Input: " , input);
                 });
                 message = messagesToSend.newMessage('eligeCita2', element.senderName);
                 user = new User_1.User(chatId, message, 'eligeCita2');
