@@ -60,7 +60,7 @@ function checkMessega() {
     citaInicial = ["cita", "citas"];
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
-    diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
+    //diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
     console.log('users', users);
     if (users.find(function (userValue) { return userValue.chatId == chatId; })) {
         if (!fromMe) {
@@ -144,11 +144,11 @@ function subFlow() {
             if (element.state == 'eligeCita1') {
                 DiasDisponibles.forEach(function (element, indice) {
                     console.log(indice);
-                    console.log(element[1]);
+                    console.log(DiasDisponibles[indice]);
                     if (Number(indice + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, element[1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[2]);
                         user = new User_1.User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
@@ -159,7 +159,7 @@ function subFlow() {
                 horasDisponibles.forEach(function (element, indice2) {
                     if (Number(indice2 + 1) == Number(input)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, element[1]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2]);
                         user = new User_1.User(chatId, message, 'eligeCita3');
                         sendMessage(user);
                         users.push(user);
@@ -168,19 +168,19 @@ function subFlow() {
             }
             if (element.state == 'eligeCita3') {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
-                    message = messagesToSend.newMessage('eligeCita5', element.senderName);
+                    message = messagesToSend.newMessage('eligeCita5', senderName);
                     user = new User_1.User(chatId, message, 'eligeCita5');
                     sendMessage(user);
                     users.push(user);
                 }
                 else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
-                    message = messagesToSend.newMessage('eligeCita1', element.senderName);
+                    message = messagesToSend.newMessage('eligeCita1', senderName);
                     user = new User_1.User(chatId, message, 'eligeCita1');
                     sendMessage(user);
                     users.push(user);
                 }
                 else {
-                    message = messagesToSend.newMessage('eligeCita7', element.senderName);
+                    message = messagesToSend.newMessage('eligeCita7', senderName);
                     user = new User_1.User(chatId, message, 'eligeCita7');
                     sendMessage(user);
                     users.push(user);
