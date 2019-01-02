@@ -88,11 +88,10 @@ function subFlow() {
         if (!fromMe) {
             if (element.state == 'citaInicial') {
                 if (tipoDocumento.find(response => utilities.isContain(input, response))) {
+                    users.splice(index, 1);
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
-                    element.state == 'citasSubFlow1';
-                    console.log(element.state);
                     sendMessage(user);
                     users.push(user);
                 }
@@ -100,39 +99,33 @@ function subFlow() {
             if (element.state == 'citasSubFlow1') {
                 console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
+                    users.splice(index, 1);
                     documentNumber = parseInt(input);
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = new User(chatId, message, 'citasSubFlow2')
-                    element.state == 'citasSubFlow2';
-                    console.log(element.state);
                     sendMessage(user);
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('citasSubFlow1', element.senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
-                    element.state == 'citasSubFlow1';
-                    console.log(element.state);
                     sendMessage(user);
                     users.push(user);
                 }
             }
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
+                    users.splice(index, 1);
                     documentDate = input;
                     message = messagesToSend.newMessage('eligeCita1', element.senderName);
                     user = new User(chatId, message, 'eligeCita1');
-                    element.state == 'eligeCita1';
-                    console.log(element.state);
                     
                     sendMessage(user);
                     users.push(user);
                 } else {
                     message = messagesToSend.newMessage('docInvalidoFecha', element.senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
-                    element.state == 'citasSubFlow1';
-                    console.log(element.state);
                     sendMessage(user);
                     users.push(user);
                 }
