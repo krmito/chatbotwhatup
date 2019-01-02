@@ -50,7 +50,7 @@ function checkMessega() {
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
-    var horasDisponibles = [
+    let horasDisponibles = [
         {
             1: "8:00",
             2: "9:00",
