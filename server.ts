@@ -25,7 +25,7 @@ let fromMe: boolean;
 
 app.use(bodyParser.json());
 
-app.post(' ', (req, res) => {
+app.post('my_webhook_url', (req, res) => {
     data = req.body; // New messages in the "body" variable
 
     console.log('ELEMENT', data);
