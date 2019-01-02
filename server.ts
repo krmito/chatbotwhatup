@@ -140,6 +140,10 @@ function subFlow() {
                 }
             }
              if (element.state == 'eligeCita1') {
+                horasDisponibles.forEach((element,index) => {
+                    console.log("Element: " , element , " " , " Input: " , input);
+                    
+                });
                 message = messagesToSend.newMessage('eligeCita2', element.senderName);
                 user = new User(chatId, message, 'eligeCita2');
                 sendMessage(user);
