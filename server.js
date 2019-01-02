@@ -166,12 +166,26 @@ function subFlow() {
                     }
                 });
             }
-            /*if (element.state == 'eligeCita3') {
-                message = messagesToSend.newMessage('eligeCita4', element.senderName);
-                user = new User(chatId, message, 'eligeCita4');
-                sendMessage(user);
-                users.push(user);
-            } */
+            if (element.state == 'eligeCita3') {
+                if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
+                    message = messagesToSend.newMessage('eligeCita5', element.senderName);
+                    user = new User_1.User(chatId, message, 'eligeCita5');
+                    sendMessage(user);
+                    users.push(user);
+                }
+                else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
+                    message = messagesToSend.newMessage('eligeCita1', element.senderName);
+                    user = new User_1.User(chatId, message, 'eligeCita1');
+                    sendMessage(user);
+                    users.push(user);
+                }
+                else {
+                    message = messagesToSend.newMessage('eligeCita7', element.senderName);
+                    user = new User_1.User(chatId, message, 'eligeCita7');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
         }
     });
 }

@@ -1,6 +1,6 @@
 
 let messagesToSend = {
-  newMessage: function (state?: string, userName?: string, dia?:string, hora?:string) {
+  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string) {
     let mensaje = '';
 
     switch (state) {
@@ -67,6 +67,15 @@ let messagesToSend = {
         mensaje = `Desea que le mandemos esta informacion a su correo
         *1. Si*
         *2. No*`;
+        break;
+      case 'eligeCita5':
+        mensaje = `Gracias ${userName}, hasta la próxima`;
+        break;
+      case 'eligeCita6':
+        mensaje = `Bye`;
+        break;
+      case 'eligeCita7':
+        mensaje = `${userName} no te entiendo`;
         break;
     }
     return mensaje;

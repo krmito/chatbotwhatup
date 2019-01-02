@@ -39,6 +39,15 @@ var messagesToSend = {
             case 'eligeCita4':
                 mensaje = "Desea que le mandemos esta informacion a su correo\n        *1. Si*\n        *2. No*";
                 break;
+            case 'eligeCita5':
+                mensaje = "Gracias " + userName + ", hasta la pr\u00F3xima";
+                break;
+            case 'eligeCita6':
+                mensaje = "Bye";
+                break;
+            case 'eligeCita7':
+                mensaje = userName + " no te entiendo";
+                break;
         }
         return mensaje;
     }
