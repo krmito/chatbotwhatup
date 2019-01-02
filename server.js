@@ -19,11 +19,18 @@ var citaInicial = [];
 var tipoDocumento = [];
 var input = "";
 var diasDisponibles = [];
-var horasDisponibles = [];
-;
 var senderName;
 var chatId;
 var fromMe;
+var horasDisponibles = [
+    {
+        1: "8:00",
+        2: "9:00",
+        3: "3:30",
+        4: "4:20",
+        5: "cancelar"
+    }
+];
 app.use(bodyParser.json());
 app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
@@ -45,15 +52,6 @@ function checkMessega() {
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
-    var horasDisponibles = [
-        {
-            1: "8:00",
-            2: "9:00",
-            3: "3:30",
-            4: "4:20",
-            5: "cancelar"
-        }
-    ];
     console.log('users', users);
     if (users.find(function (userValue) { return userValue.chatId == chatId; })) {
         if (!fromMe) {

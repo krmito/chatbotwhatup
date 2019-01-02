@@ -18,11 +18,18 @@ let citaInicial: Array<string> = [];
 let tipoDocumento: Array<string> = [];
 let input: string = "";
 let diasDisponibles: Array<string> = [];
-let horasDisponibles: Array<string> = [];;
 let senderName: string;
 let chatId: string;
 let fromMe: boolean;
-
+let horasDisponibles = [
+    {
+        1: "8:00",
+        2: "9:00",
+        3: "3:30",
+        4: "4:20",
+        5: "cancelar"
+    }
+];
 app.use(bodyParser.json());
 
 app.post('/my_webhook_url2', (req, res) => {
@@ -50,15 +57,7 @@ function checkMessega() {
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
-    let horasDisponibles = [
-        {
-            1: "8:00",
-            2: "9:00",
-            3: "3:30",
-            4: "4:20",
-            5: "cancelar"
-        }
-    ];
+ 
     console.log('users', users);
 
     if (users.find(userValue => userValue.chatId == chatId)) {
