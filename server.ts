@@ -59,7 +59,12 @@ function checkMessega() {
           5: "cancelar"
         }
     ];
-    console.log(horasDisponibles);
+    horasDisponibles.forEach(element => {
+        console.log(element);
+        
+        //console.log("Element: " , element, " " , " Input: " , input);
+        
+    });
     console.log('users', users);
 
     if (users.find(userValue => userValue.chatId == chatId)) {
@@ -140,12 +145,7 @@ function subFlow() {
                 }
             }
              if (element.state == 'eligeCita1') {
-                horasDisponibles.forEach(element => {
-                    console.log(element);
-                    
-                    //console.log("Element: " , element, " " , " Input: " , input);
-                    
-                });
+                
                 message = messagesToSend.newMessage('eligeCita2', element.senderName);
                 user = new User(chatId, message, 'eligeCita2');
                 sendMessage(user);

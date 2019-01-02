@@ -54,7 +54,10 @@ function checkMessega() {
             5: "cancelar"
         }
     ];
-    console.log(horasDisponibles);
+    horasDisponibles.forEach(function (element) {
+        console.log(element);
+        //console.log("Element: " , element, " " , " Input: " , input);
+    });
     console.log('users', users);
     if (users.find(function (userValue) { return userValue.chatId == chatId; })) {
         if (!fromMe) {
@@ -134,10 +137,6 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
-                horasDisponibles.forEach(function (element) {
-                    console.log(element);
-                    //console.log("Element: " , element, " " , " Input: " , input);
-                });
                 message = messagesToSend.newMessage('eligeCita2', element.senderName);
                 user = new User_1.User(chatId, message, 'eligeCita2');
                 sendMessage(user);
