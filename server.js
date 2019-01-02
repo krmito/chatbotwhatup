@@ -51,6 +51,7 @@ function checkMessega() {
         if (!fromMe) {
             if (saludosInicial.find(function (valueSaludo1) { return valueSaludo1 == input; })) {
                 message = messagesToSend.newMessage('saludoInicial', senderName);
+                user = new User_1.User();
                 user = new User_1.User(chatId, message, 'saludoInicial');
                 sendMessage(user);
                 users.push(user);
@@ -58,6 +59,7 @@ function checkMessega() {
             else if (citaInicial.find(function (valueCita) { return utilities.isContain(input, valueCita); })) {
                 console.log('hey mans ');
                 message = messagesToSend.newMessage('citaInicial', senderName);
+                user = new User_1.User();
                 user = new User_1.User(chatId, message, 'citaInicial');
                 sendMessage(user);
                 users.push(user); /*  */
@@ -67,6 +69,7 @@ function checkMessega() {
     else {
         if (saludosInicial.find(function (valueSaludo2) { return valueSaludo2 == input; })) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
+            user = new User_1.User();
             user = new User_1.User(chatId, message, 'saludoInicial');
             sendMessage(user);
             users.push(user);
@@ -80,6 +83,7 @@ function subFlow() {
                 if (tipoDocumento.find(function (response) { return utilities.isContain(input, response); })) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = new User_1.User();
                     user = new User_1.User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
@@ -91,6 +95,7 @@ function subFlow() {
                     documentNumber = parseInt(input);
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User_1.User();
                     user = new User_1.User(chatId, message, 'citasSubFlow2');
                     sendMessage(user);
                     users.push(user);
@@ -98,6 +103,7 @@ function subFlow() {
                 else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
+                    user = new User_1.User();
                     user = new User_1.User(chatId, message, 'docInvalido');
                     sendMessage(user);
                     users.push(user);

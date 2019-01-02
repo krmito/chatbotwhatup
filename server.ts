@@ -57,6 +57,7 @@ function checkMessega() {
         if (!fromMe) {
             if (saludosInicial.find(valueSaludo1 => valueSaludo1 == input)) {
                 message = messagesToSend.newMessage('saludoInicial', senderName);
+                user = new User();
                 user = new User(chatId, message, 'saludoInicial')
                 sendMessage(user);
                 users.push(user);
@@ -65,6 +66,7 @@ function checkMessega() {
                 console.log('hey mans ');
 
                 message = messagesToSend.newMessage('citaInicial', senderName);
+                user = new User();
                 user = new User(chatId, message, 'citaInicial')
                 sendMessage(user);
                 users.push(user);/*  */
@@ -73,6 +75,7 @@ function checkMessega() {
     } else {
         if (saludosInicial.find(valueSaludo2 => valueSaludo2 == input)) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
+            user = new User();
             user = new User(chatId, message, 'saludoInicial')
             sendMessage(user);
             users.push(user);
@@ -87,6 +90,7 @@ function subFlow() {
                 if (tipoDocumento.find(response => utilities.isContain(input, response))) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = new User();
                     user = new User(chatId, message, 'citasSubFlow1')
                     sendMessage(user);
                     users.push(user);
@@ -98,12 +102,14 @@ function subFlow() {
                     documentNumber = parseInt(input); 
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User();
                     user = new User(chatId, message, 'citasSubFlow2')
                     sendMessage(user);
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
+                    user = new User();
                     user = new User(chatId, message, 'docInvalido');
                     sendMessage(user);
                     users.push(user);

@@ -5,9 +5,9 @@ var User = /** @class */ (function () {
         this.chatId = '';
         this.body = '';
         this.state = '';
-        this.chatId = chatId;
-        this.body = body;
-        this.state = state;
+        this.chatId = chatId || "";
+        this.body = body || "";
+        this.state = state || "";
     }
     Object.defineProperty(User.prototype, "getChatId", {
         get: function () {

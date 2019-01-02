@@ -3,12 +3,12 @@ export class User {
   body:string = '';
   state:string = '';
 
-  constructor(chatId:string, body:string, state:string){
-    this.chatId = chatId;
-    this.body = body;
-    this.state = state
+  
+  constructor(chatId?:string, body?:string, state?:string){
+    this.chatId = chatId || "";
+    this.body = body || "";
+    this.state = state || ""
   }
-
   
   get getChatId(): string{
     return this.chatId;
