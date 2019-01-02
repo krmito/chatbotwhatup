@@ -137,10 +137,14 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
-                message = messagesToSend.newMessage('eligeCita2', element.senderName);
-                user = new User_1.User(chatId, message, 'eligeCita2');
-                sendMessage(user);
-                users.push(user);
+                horasDisponibles.forEach(function (element, index) {
+                    if ((index + 1) == Number(input)) {
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, element);
+                        user = new User_1.User(chatId, message, 'eligeCita2');
+                        sendMessage(user);
+                        users.push(user);
+                    }
+                });
             }
             /*if (element.state == 'eligeCita2') {
                 message = messagesToSend.newMessage('eligeCita3', element.senderName);

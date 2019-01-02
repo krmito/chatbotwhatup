@@ -52,18 +52,18 @@ function checkMessega() {
     diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar", "1", "2", "3", "4", "5"];
     var horasDisponibles = [
         {
-          1: "8:00",
-          2: "9:00",
-          3: "3:30",
-          4: "4:20",
-          5: "cancelar"
+            1: "8:00",
+            2: "9:00",
+            3: "3:30",
+            4: "4:20",
+            5: "cancelar"
         }
     ];
-    horasDisponibles.forEach((element,index) => {
+    horasDisponibles.forEach((element, index) => {
         console.log(index + 1);
-        
+
         //console.log("Element: " , element, " " , " Input: " , input);
-        
+
     });
     console.log('users', users);
 
@@ -86,7 +86,7 @@ function checkMessega() {
                 users.push(user);/*  */
             }
         }
-    } else { 
+    } else {
         if (saludosInicial.find(valueSaludo2 => valueSaludo2 == input)) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
             user = new User(chatId, message, 'saludoInicial')
@@ -94,11 +94,11 @@ function checkMessega() {
             users.push(user);
         }
     }
-} 
+}
 
 function subFlow() {
     users.forEach((element, index) => {
-        console.log("Estado: " , element.state);
+        console.log("Estado: ", element.state);
         if (!fromMe) {
             if (element.state == 'citaInicial') {
                 if (tipoDocumento.find(response => utilities.isContain(input, response))) {
@@ -134,7 +134,7 @@ function subFlow() {
                     documentDate = input;
                     message = messagesToSend.newMessage('eligeCita1', senderName);
                     user = new User(chatId, message, 'eligeCita1');
-                    
+
                     sendMessage(user);
                     users.push(user);
                 } else {
@@ -144,14 +144,18 @@ function subFlow() {
                     users.push(user);
                 }
             }
-             if (element.state == 'eligeCita1') {
-                
-                message = messagesToSend.newMessage('eligeCita2', element.senderName);
-                user = new User(chatId, message, 'eligeCita2');
-                sendMessage(user);
-                users.push(user);
+            if (element.state == 'eligeCita1') {
+                horasDisponibles.forEach((element, index) => {
+                    if ((index + 1) == Number(input)) {
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, element);
+                        user = new User(chatId, message, 'eligeCita2');
+                        sendMessage(user);
+                        users.push(user);
+                    }
+                });
+
             }
-            
+
             /*if (element.state == 'eligeCita2') {
                 message = messagesToSend.newMessage('eligeCita3', element.senderName);
                 user = new User(chatId, message, 'eligeCita3');

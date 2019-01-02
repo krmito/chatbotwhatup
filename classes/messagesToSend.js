@@ -31,7 +31,7 @@ var messagesToSend = {
                 mensaje = userName + " se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles\n*1. Martes* \n*2. Miercoles* \n*3. Jueves* \n*4. Viernes* \n*5.Cancelar* \n";
                 break;
             case 'eligeCita2':
-                mensaje = userName + " estas son las horas en que tenemos citas disponibles\n*1. 8:00* \n*2. 9:00* \n*3. 3:30* \n*4. 4:20* \n*5.Cancelar* \n";
+                mensaje = userName + " estas son las horas en que tenemos citas disponibles para el " + hora + "\n*1. 8:00* \n*2. 9:00* \n*3. 3:30* \n*4. 4:20* \n*5.Cancelar* \n";
                 break;
             case 'eligeCita3':
                 mensaje = userName + " su cita esta para el " + dia + " a las " + hora + " en la sede principal\n        *1. Ok*\n        *2. Cancelar*";
