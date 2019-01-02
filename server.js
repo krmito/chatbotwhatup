@@ -54,8 +54,8 @@ function checkMessega() {
             5: "cancelar"
         }
     ];
-    horasDisponibles.forEach(function (element) {
-        console.log(element);
+    horasDisponibles.forEach(function (element, index) {
+        console.log(index + 1);
         //console.log("Element: " , element, " " , " Input: " , input);
     });
     console.log('users', users);
