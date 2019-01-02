@@ -59,12 +59,6 @@ function checkMessega() {
             5: "cancelar"
         }
     ];
-    horasDisponibles.forEach((element, index) => {
-        console.log(index + 1);
-
-        //console.log("Element: " , element, " " , " Input: " , input);
-
-    });
     console.log('users', users);
 
     if (users.find(userValue => userValue.chatId == chatId)) {
@@ -145,6 +139,7 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
+                users.splice(index, 1);
                 horasDisponibles.forEach((element, index) => {
                     console.log(index);
                     

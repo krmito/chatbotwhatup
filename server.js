@@ -54,10 +54,6 @@ function checkMessega() {
             5: "cancelar"
         }
     ];
-    horasDisponibles.forEach(function (element, index) {
-        console.log(index + 1);
-        //console.log("Element: " , element, " " , " Input: " , input);
-    });
     console.log('users', users);
     if (users.find(function (userValue) { return userValue.chatId == chatId; })) {
         if (!fromMe) {
@@ -137,6 +133,7 @@ function subFlow() {
                 }
             }
             if (element.state == 'eligeCita1') {
+                users.splice(index, 1);
                 horasDisponibles.forEach(function (element, index) {
                     console.log(index);
                     if (Number(index + 1) == Number(input)) {
