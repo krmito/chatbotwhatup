@@ -7,7 +7,7 @@ var User_1 = require("./classes/User");
 var messagesToSend = require("./classes/messagesToSend");
 var utilities = require("./classes/utilities");
 var app = express();
-var url = 'https://eu14.chat-api.com/instance20409/sendMessage?token=cd5k6c9y2tynp1wa';
+var url = 'https://eu14.chat-api.com/instance20416/sendMessage?token=cd5k6c9y2tynp1wa';
 var users = [];
 var user;
 var data;
