@@ -17,7 +17,7 @@ var message;
 var saludosInicial = [];
 var citaInicial = [];
 var tipoDocumento = [];
-var input;
+var input = "";
 var diasDisponibles = [];
 var horasDisponibles = [];
 ;

@@ -16,7 +16,7 @@ let message: string;
 let saludosInicial: Array<string> = [];
 let citaInicial: Array<string> = [];
 let tipoDocumento: Array<string> = [];
-let input: string;
+let input: string = "";
 let diasDisponibles:Array<string> = [];
 let horasDisponibles:Array<string> = [];;
 let senderName: string;
