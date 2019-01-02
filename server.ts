@@ -80,7 +80,7 @@ function checkMessega() {
             users.push(user);
         }
     }
-}
+} 
 
 function subFlow() {
     users.forEach((element, index) => {
