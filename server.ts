@@ -72,7 +72,7 @@ function checkMessega() {
                 users.push(user);/*  */
             }
         }
-    } else {
+    } else { 
         if (saludosInicial.find(valueSaludo2 => valueSaludo2 == input)) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
             user = new User(chatId, message, 'saludoInicial')
