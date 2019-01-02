@@ -166,10 +166,10 @@ function subFlow() {
                     const element = DiasDisponibles[indices];
                     console.log(indices + 1);
                     console.log(DiasDisponibles[indices + 1]);
-                    if (Number(indices + 1) == Number(input)) {
+                    if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices + 1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, null, DiasDisponibles[indices]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
