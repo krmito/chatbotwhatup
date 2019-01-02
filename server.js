@@ -143,7 +143,7 @@ function subFlow() {
             }
             if (element.state == 'eligeCita1') {
                 DiasDisponibles.forEach(function (element, indice) {
-                    console.log(indice);
+                    console.log(indice + 1);
                     console.log(DiasDisponibles[indice]);
                     if (Number(indice + 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
@@ -178,13 +178,12 @@ function subFlow() {
                     user = new User_1.User(chatId, message, 'eligeCita1');
                     sendMessage(user);
                     users.push(user);
-                }
-                else {
+                } /* else{
                     message = messagesToSend.newMessage('eligeCita7', senderName);
-                    user = new User_1.User(chatId, message, 'eligeCita7');
+                    user = new User(chatId, message, 'eligeCita7');
                     sendMessage(user);
                     users.push(user);
-                }
+                } */
             }
         }
     });
