@@ -23,13 +23,10 @@ var senderName;
 var chatId;
 var fromMe;
 var DiasDisponibles = [
-    {
-        1: "Martes",
-        2: "Miercoles",
-        3: "Jueves",
-        4: "Viernes",
-        5: "Cancelar"
-    }
+    { 1: "Martes" },
+    { 2: "Miercoles" },
+    { 3: "Jueves" },
+    { 4: "Viernes" },
 ];
 var horasDisponibles = [
     {

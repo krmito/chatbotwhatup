@@ -38,13 +38,10 @@ let senderName: string;
 let chatId: string;
 let fromMe: boolean;
 let DiasDisponibles = [
-    {
-        1: "Martes",
-        2: "Miercoles",
-        3: "Jueves",
-        4: "Viernes",
-        5: "Cancelar"
-    }
+    {1: "Martes"},
+    {2: "Miercoles"},
+    {3: "Jueves"},
+    {4: "Viernes"},
 ];
 
 let horasDisponibles = [
