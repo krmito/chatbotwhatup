@@ -92,7 +92,7 @@ function subFlow() {
                     users.push(user);
                 }
             }
-            if (element.state == 'citasSubFlow1') {
+            if (element.state == 'citasSubFlow1' || element.state == 'docInvalido') {
                 console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
                     documentNumber = parseInt(input); 
@@ -104,9 +104,9 @@ function subFlow() {
                 } else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
-                    user = new User(chatId, message, 'citasSubFlow1');
+                    /*user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
-                    users.push(user);
+                    users.push(user);*/
                 }
             }
             if (element.state == 'citasSubFlow2') {
