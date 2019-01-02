@@ -145,7 +145,7 @@ function subFlow() {
                     console.log(index);
                     console.log(element[1]);
                     
-                    if (Number(index + 1) == Number(input)) {
+                    if (Number(index) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
                         message = messagesToSend.newMessage('eligeCita2', senderName, null, element[1]);
