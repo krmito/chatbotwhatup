@@ -95,7 +95,7 @@ function subFlow() {
                     sendMessage(user);
                     users.push(user);
                 }
-                else if (/([a-zA-Z])/g) {
+                else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
                     user = new User_1.User(chatId, message, 'citasSubFlow1');

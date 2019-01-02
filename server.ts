@@ -70,7 +70,6 @@ function checkMessega() {
                 users.push(user);/*  */
             }
         }
-
     } else {
         if (saludosInicial.find(valueSaludo2 => valueSaludo2 == input)) {
             message = messagesToSend.newMessage('saludoInicial', senderName);
@@ -102,7 +101,7 @@ function subFlow() {
                     user = new User(chatId, message, 'citasSubFlow2')
                     sendMessage(user);
                     users.push(user);
-                } else if (/([a-zA-Z])/g) {
+                } else {
                     console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('docInvalido', element.senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
