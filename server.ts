@@ -47,7 +47,7 @@ function checkMessega() {
     });
 
     citaInicial = ["cita", "citas"];
-    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
+    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo","ole"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar","1","2","3","4"];
     diasDisponibles = ["martes","miercoles","jueves","viernes","cancelar","1","2","3","4","5"];
     horasDisponibles = ["8:00", "9:00", "3:30", "4:20","cancelar","1","2","3","4","5"];
