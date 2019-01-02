@@ -95,7 +95,7 @@ function subFlow() {
                     users.push(user);
                 }
             }
-            if (element.state == 'citasSubFlow1' || element.state == 'docInvalido') {
+            if (element.state == 'citasSubFlow1') {
                 console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
                     documentNumber = parseInt(input);
@@ -106,8 +106,8 @@ function subFlow() {
                     users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
-                    message = messagesToSend.newMessage('docInvalido', element.senderName);
-                    user = new User(chatId, message, 'docInvalido');
+                    message = messagesToSend.newMessage('citasSubFlow1', element.senderName);
+                    user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
                 }
