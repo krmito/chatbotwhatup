@@ -180,9 +180,9 @@ function subFlow() {
             if (element.state == 'eligeCita2') {
                 horasDisponibles.forEach((element, indice2) => {
 
-                    if (Number(indice2 - 1) == Number(input)) {
+                    if (Number(indice2 - 2) == Number(input)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 2]);
                         user = new User(chatId, message, 'eligeCita3');
                         sendMessage(user);
                         users.push(user);
