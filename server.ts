@@ -43,8 +43,8 @@ app.post('/my_webhook_url2', (req, res) => {
 
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
-        //subFlow();
-        servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
+        subFlow();
+        //servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
     });
 
     res.sendStatus(200); //Response does not matter
