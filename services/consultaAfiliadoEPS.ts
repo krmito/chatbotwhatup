@@ -53,7 +53,8 @@ export class servicioAfiliadoEPS {
       }, (error:any, response:any, body:any) => {
         
         this.reponse = response;
-
+        console.log("Response_>_>" + this.reponse);
+        
         if (error) {
           return console.dir(error);
         }
