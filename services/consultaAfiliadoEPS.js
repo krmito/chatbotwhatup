@@ -57,7 +57,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
                 _this.tipoDocumento = '';
             }
         });
-        return JSON.stringify(this.reponse);
+        return this.reponse;
     };
     servicioAfiliadoEPS.servicio = "https://virtual.comfenalcovalle.com.co/esb/RESTJSONChannelAdapter/Afiliado";
     servicioAfiliadoEPS.cuerpo = {};
