@@ -6,6 +6,7 @@ var dni;
 var fechaExpedicion;
 var numeroAfiliacion;
 var Request = require("request");
+
 function armaObjetos() {
     cuerpo = {
         "requestMessageOut": {

@@ -4,7 +4,7 @@ import request = require('request');
 import { User } from "./classes/User";
 let messagesToSend = require("./classes/messagesToSend");
 let utilities = require("./classes/utilities");
-let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
+let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS.js");
 
 
 let app = express();
