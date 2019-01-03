@@ -201,7 +201,7 @@ function consultarServicio() {
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     var datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
     console.log("BODY__>__>__>__>", data.body.responseMessageOut.body);
-    if (datos.body.responseMessageOut.body) {
+    if (datos.responseMessageOut.body) {
         console.log("Existe");
     }
     else {

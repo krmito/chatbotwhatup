@@ -52,7 +52,7 @@ export class servicioAfiliadoEPS {
         "body": JSON.stringify(this.cuerpo)
       }, (error:any, response:any, body:any) => {
         
-        this.response = JSON.parse(response);
+        this.response = JSON.parse(response.body);
         //console.log("Response_>_>" + JSON.stringify(this.response));
       
         if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
