@@ -44,7 +44,7 @@ export class servicioAfiliadoEPS {
         }
       }
     }
-    console.log("Cuerpo: " + this.cuerpo);
+    console.log("Cuerpo: " + JSON.stringify(this.cuerpo));
     this.request.post(
       {
         "headers": { "content-type": "application/json" },
