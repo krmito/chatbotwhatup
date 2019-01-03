@@ -5,6 +5,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
     }
     servicioAfiliadoEPS.armaObjetos = function (tipo, cedula) {
         var _this = this;
+        console.log("Tipo: ", tipo, " cédula: ", cedula);
         this.cuerpo = {
             "requestMessageOut": {
                 "header": {

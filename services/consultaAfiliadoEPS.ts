@@ -9,6 +9,9 @@ export class servicioAfiliadoEPS {
   constructor() {}
 
   static armaObjetos(tipo:string, cedula:number) {
+
+    console.log("Tipo: " , tipo , " cédula: " , cedula);
+    
     this.cuerpo = {
       "requestMessageOut": {
         "header": {
