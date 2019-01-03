@@ -3,7 +3,7 @@ import bodyParser = require('body-parser');
 import request = require('request');
 import { User } from "./classes/User";
 let messagesToSend = require("./classes/messagesToSend");
-let utilities = require("./classes/utilities");
+import utilities = require("./classes/utilities");
 import servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 
 let app = express();
@@ -42,7 +42,7 @@ app.post('/my_webhook_url2', (req, res) => {
     data = req.body; // New messages in the "body" variable
 
     console.log('ELEMENT', data);
-    utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
+    utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
         //subFlow();
         setTimeout(() => {
             console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
@@ -78,7 +78,7 @@ function checkMessega() {
                 sendMessage(user);
                 users.push(user);
 
-            } else if (citaInicial.find(valueCita => utilities.isContain(input, valueCita))) {
+            } else if (citaInicial.find(valueCita => utilities.utilities.isContain(input, valueCita))) {
                 console.log('hey mans ');
 
                 message = messagesToSend.newMessage('citaInicial', senderName);
@@ -104,7 +104,7 @@ function subFlow() {
         if (!fromMe) {
             //Ingresa l tipo de documento
             if (element.state == 'citaInicial') {
-                if (tipoDocumento.find(response => utilities.isContain(input, response))) {
+                if (tipoDocumento.find(response => utilities.utilities.isContain(input, response))) {
                     users.splice(index, 1);
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
@@ -133,7 +133,6 @@ function subFlow() {
                     users.push(user);
                 }
             }
-
 
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
@@ -184,7 +183,6 @@ function subFlow() {
                 });
             }
             if (element.state == 'eligeCita3') {
-
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('eligeCita5', senderName);
                     user = new User(chatId, message, 'eligeCita5');
@@ -195,13 +193,7 @@ function subFlow() {
                     user = new User(chatId, message, 'eligeCita1');
                     sendMessage(user);
                     users.push(user);
-                } /* else{
-                    message = messagesToSend.newMessage('eligeCita7', senderName);
-                    user = new User(chatId, message, 'eligeCita3');
-                    sendMessage(user);
-                    users.push(user);
-                } */
-
+                }
             }
         }
     });
@@ -221,27 +213,4 @@ let server = app.listen(process.env.PORT, function () {
     let port = server.address().port;
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
-
-
-function validaDoc() {
-    if (element.state == 'citasSubFlow1') {
-        console.log('this is happening');
-        if (input.match(/([^a-zA-Z])/g)) {
-            users.splice(index, 1);
-            documentNumber = parseInt(input);
-            console.log('Cant tell man');
-            message = messagesToSend.newMessage('citasSubFlow2', senderName);
-            user = new User(chatId, message, 'citasSubFlow2')
-            sendMessage(user);
-            users.push(user);
-        } else {
-            console.log('HEY BRO!!!!!');
-            users.splice(index, 1);
-            message = messagesToSend.newMessage('citasSubFlow1', senderName);
-            user = new User(chatId, message, 'citasSubFlow1');
-            sendMessage(user);
-            users.push(user);
-        }
-    }
-}
 

@@ -40,7 +40,7 @@ app.use(bodyParser.json());
 app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
-    utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
+    utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
         //subFlow();
         setTimeout(function () {
             console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
@@ -70,7 +70,7 @@ function checkMessega() {
                 sendMessage(user);
                 users.push(user);
             }
-            else if (citaInicial.find(function (valueCita) { return utilities.isContain(input, valueCita); })) {
+            else if (citaInicial.find(function (valueCita) { return utilities.utilities.isContain(input, valueCita); })) {
                 console.log('hey mans ');
                 message = messagesToSend.newMessage('citaInicial', senderName);
                 user = new User_1.User();
@@ -95,7 +95,7 @@ function subFlow() {
         if (!fromMe) {
             //Ingresa l tipo de documento
             if (element.state == 'citaInicial') {
-                if (tipoDocumento.find(function (response) { return utilities.isContain(input, response); })) {
+                if (tipoDocumento.find(function (response) { return utilities.utilities.isContain(input, response); })) {
                     users.splice(index, 1);
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
@@ -180,12 +180,7 @@ function subFlow() {
                     user = new User_1.User(chatId, message, 'eligeCita1');
                     sendMessage(user);
                     users.push(user);
-                } /* else{
-                    message = messagesToSend.newMessage('eligeCita7', senderName);
-                    user = new User(chatId, message, 'eligeCita3');
-                    sendMessage(user);
-                    users.push(user);
-                } */
+                }
             }
         }
     });
@@ -202,25 +197,3 @@ var server = app.listen(process.env.PORT, function () {
     var port = server.address().port;
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
-function validaDoc() {
-    if (element.state == 'citasSubFlow1') {
-        console.log('this is happening');
-        if (input.match(/([^a-zA-Z])/g)) {
-            users.splice(index, 1);
-            documentNumber = parseInt(input);
-            console.log('Cant tell man');
-            message = messagesToSend.newMessage('citasSubFlow2', senderName);
-            user = new User_1.User(chatId, message, 'citasSubFlow2');
-            sendMessage(user);
-            users.push(user);
-        }
-        else {
-            console.log('HEY BRO!!!!!');
-            users.splice(index, 1);
-            message = messagesToSend.newMessage('citasSubFlow1', senderName);
-            user = new User_1.User(chatId, message, 'citasSubFlow1');
-            sendMessage(user);
-            users.push(user);
-        }
-    }
-}
