@@ -151,12 +151,6 @@ function subFlow() {
                         sendMessage(user);
                         users.push(user);
                     }
-                    else {
-                        message = messagesToSend.newMessage('eligeCita7', senderName);
-                        user = new User_1.User(chatId, message, 'eligeCita1');
-                        sendMessage(user);
-                        users.push(user);
-                    }
                 }
             }
             if (element.state == 'eligeCita2') {
@@ -165,12 +159,6 @@ function subFlow() {
                         users.splice(index, 1);
                         message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
                         user = new User_1.User(chatId, message, 'eligeCita3');
-                        sendMessage(user);
-                        users.push(user);
-                    }
-                    else {
-                        message = messagesToSend.newMessage('eligeCita7', senderName);
-                        user = new User_1.User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
                     }
@@ -188,13 +176,12 @@ function subFlow() {
                     user = new User_1.User(chatId, message, 'eligeCita1');
                     sendMessage(user);
                     users.push(user);
-                }
-                else {
+                } /* else{
                     message = messagesToSend.newMessage('eligeCita7', senderName);
-                    user = new User_1.User(chatId, message, 'eligeCita3');
+                    user = new User(chatId, message, 'eligeCita3');
                     sendMessage(user);
                     users.push(user);
-                }
+                } */
             }
         }
     });
