@@ -52,12 +52,9 @@ export class servicioAfiliadoEPS {
         "body": JSON.stringify(this.cuerpo)
       }, (error:any, response:any, body:any) => {
         
-        this.response = JSON.stringify(this.response);
+        this.response = JSON.parse(this.response);
         //console.log("Response_>_>" + JSON.stringify(this.response));
-        
-        if (error) {
-          return console.dir(error);
-        }
+      
         if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
           this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
           this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;

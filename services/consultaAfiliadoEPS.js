@@ -44,11 +44,8 @@ var servicioAfiliadoEPS = /** @class */ (function () {
             "url": this.servicio,
             "body": JSON.stringify(this.cuerpo)
         }, function (error, response, body) {
-            _this.response = JSON.stringify(_this.response);
+            _this.response = JSON.parse(_this.response);
             //console.log("Response_>_>" + JSON.stringify(this.response));
-            if (error) {
-                return console.dir(error);
-            }
             if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
                 _this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
                 _this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
