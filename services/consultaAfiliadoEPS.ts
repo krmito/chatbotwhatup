@@ -5,8 +5,6 @@ export class servicioAfiliadoEPS {
   static request = require('request');
   static tipoDocumento: string = "";
   static fechaExpedicion: string = "";
-  static error: any;
-  static response: any;
 
   constructor() {}
 
@@ -49,7 +47,8 @@ export class servicioAfiliadoEPS {
         "headers": { "content-type": "application/json" },
         "url": this.servicio,
         "body": JSON.stringify(this.cuerpo)
-      }, (error, response, body) => {
+      }, (error:any, response:any, body:any) => {
+
         if (error) {
           return console.dir(error);
         }
@@ -57,6 +56,8 @@ export class servicioAfiliadoEPS {
           this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
           this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
 
+          console.log("CC: " , this.tipoDocumento , " Fecha expedición: " , this.fechaExpedicion);
+          
         } else {
           this.tipoDocumento = '';
 

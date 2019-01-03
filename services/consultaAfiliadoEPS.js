@@ -48,6 +48,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
             if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
                 _this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
                 _this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
+                console.log("CC: ", _this.tipoDocumento, " Fecha expedición: ", _this.fechaExpedicion);
             }
             else {
                 _this.tipoDocumento = '';
