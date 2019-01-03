@@ -38,19 +38,13 @@ var servicioAfiliadoEPS = /** @class */ (function () {
                 }
             }
         };
-        this.request.post(console.log("Cuerpo: " + this.cuerpo));
-        {
-            "headers";
-            {
-                "content-type";
-                "application/json";
-            }
-            "url";
-            this.servicio,
-                "body";
-            JSON.stringify(this.cuerpo);
-        }
-        (function (error, response, body) {
+        console.log("Cuerpo: " + this.cuerpo);
+        this.request.post({
+            "headers": { "content-type": "application/json" },
+            "url": this.servicio,
+            "body": JSON.stringify(this.cuerpo)
+        }, function (error, response, body) {
+            _this.reponse = response;
             if (error) {
                 return console.dir(error);
             }
@@ -63,7 +57,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
                 _this.tipoDocumento = '';
             }
         });
-        ;
+        return this.reponse;
     };
     servicioAfiliadoEPS.servicio = "https://virtual.comfenalcovalle.com.co/esb/RESTJSONChannelAdapter/Afiliado";
     servicioAfiliadoEPS.cuerpo = {};

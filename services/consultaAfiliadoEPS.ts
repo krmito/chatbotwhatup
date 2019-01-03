@@ -5,7 +5,7 @@ export class servicioAfiliadoEPS {
   static request = require('request');
   static tipoDocumento: string = "";
   static fechaExpedicion: string = "";
-
+  static reponse:any;
   constructor() {}
 
   static armaObjetos(tipo:string, cedula:number) {
@@ -44,15 +44,15 @@ export class servicioAfiliadoEPS {
         }
       }
     }
-
+    console.log("Cuerpo: " + this.cuerpo);
     this.request.post(
-      console.log("Cuerpo: " +this.cuerpo);
-      
       {
         "headers": { "content-type": "application/json" },
         "url": this.servicio,
         "body": JSON.stringify(this.cuerpo)
       }, (error:any, response:any, body:any) => {
+        
+        this.reponse = response;
 
         if (error) {
           return console.dir(error);
@@ -68,5 +68,6 @@ export class servicioAfiliadoEPS {
 
         }
       });
+      return this.reponse;
   }
 }
