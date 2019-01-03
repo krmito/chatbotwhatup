@@ -44,8 +44,8 @@ var servicioAfiliadoEPS = /** @class */ (function () {
             "url": this.servicio,
             "body": JSON.stringify(this.cuerpo)
         }, function (error, response, body) {
-            _this.reponse = response;
-            console.log("Response_>_>" + JSON.stringify(_this.reponse));
+            _this.response = JSON.stringify(_this.response);
+            console.log("Response_>_>" + JSON.stringify(_this.response));
             if (error) {
                 return console.dir(error);
             }
@@ -58,7 +58,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
                 _this.tipoDocumento = '';
             }
         });
-        return this.reponse;
+        return this.response;
     };
     servicioAfiliadoEPS.servicio = "https://virtual.comfenalcovalle.com.co/esb/RESTJSONChannelAdapter/Afiliado";
     servicioAfiliadoEPS.cuerpo = {};

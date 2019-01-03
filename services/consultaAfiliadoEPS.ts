@@ -5,7 +5,7 @@ export class servicioAfiliadoEPS {
   static request = require('request');
   static tipoDocumento: string = "";
   static fechaExpedicion: string = "";
-  static reponse:any;
+  static response:any;
   constructor() {}
 
   static armaObjetos(tipo:string, cedula:string) {
@@ -52,8 +52,8 @@ export class servicioAfiliadoEPS {
         "body": JSON.stringify(this.cuerpo)
       }, (error:any, response:any, body:any) => {
         
-        this.reponse = response;
-        console.log("Response_>_>" + JSON.stringify(this.reponse));
+        this.response = JSON.stringify(this.response);
+        console.log("Response_>_>" + JSON.stringify(this.response));
         
         if (error) {
           return console.dir(error);
@@ -69,6 +69,6 @@ export class servicioAfiliadoEPS {
 
         }
       });
-      return this.reponse;
+      return this.response;
   }
 }
