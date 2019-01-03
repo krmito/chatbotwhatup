@@ -53,7 +53,7 @@ export class servicioAfiliadoEPS {
       }, (error:any, response:any, body:any) => {
         
         this.response = response;
-        console.log("Response_>_>" + JSON.stringify(this.response));
+        //console.log("Response_>_>" + JSON.stringify(this.response));
         
         if (error) {
           return console.dir(error);

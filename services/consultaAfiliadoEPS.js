@@ -45,7 +45,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
             "body": JSON.stringify(this.cuerpo)
         }, function (error, response, body) {
             _this.response = response;
-            console.log("Response_>_>" + JSON.stringify(_this.response));
+            //console.log("Response_>_>" + JSON.stringify(this.response));
             if (error) {
                 return console.dir(error);
             }

@@ -51,7 +51,7 @@ app.post('/my_webhook_url2', (req, res) => {
         let datos = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
 
         console.log("BODY__>__>__>__>", data.body.responseMessageOut.body);
-        if(data.body.responseMessageOut.body){
+        if(datos.body.responseMessageOut.body){
             console.log("Existe");
         }else{
             console.log("No existe"); 
