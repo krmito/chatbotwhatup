@@ -8,7 +8,7 @@ export class servicioAfiliadoEPS {
   static reponse:any;
   constructor() {}
 
-  static armaObjetos(tipo:string, cedula:number) {
+  static armaObjetos(tipo:string, cedula:string) {
 
     console.log("Tipo: " , tipo , " cédula: " , cedula);
     
