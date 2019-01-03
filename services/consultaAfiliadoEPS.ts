@@ -1,63 +1,66 @@
+export class servicioAfiliadoEPS {
 
-let servicio = "https://virtual.comfenalcovalle.com.co/esb/RESTJSONChannelAdapter/Afiliado";
-let cuerpo = {}
-let tipoDocumento;
-let dni;
-let fechaExpedicion;
-let numeroAfiliacion;
+  static servicio = "https://virtual.comfenalcovalle.com.co/esb/RESTJSONChannelAdapter/Afiliado";
+  static cuerpo = {}
+  static request = require('request');
+  static tipoDocumento: string = "";
+  static fechaExpedicion: string = "";
+  static error: any;
+  static response: any;
 
-let Request = require("request");
+  constructor() {}
 
-function armaObjetos() {
-
-  cuerpo = {
-    "requestMessageOut": {
-      "header": {
-        "invokerDateTime": "2017-11-11 08:49:45",
-        "moduleId": "TAQUILLA1",
-        "systemId": "PEEWAH",
-        "messageId": "PEEWAH|TAQUILLA1|CC901097473",
-        "logginData": {
-          "sourceSystemId": "",
-          "destinationSystemId": ""
+  static armaObjetos(tipo:string, cedula:number) {
+    this.cuerpo = {
+      "requestMessageOut": {
+        "header": {
+          "invokerDateTime": "2017-11-11 08:49:45",
+          "moduleId": "TAQUILLA1",
+          "systemId": "PEEWAH",
+          "messageId": "PEEWAH|TAQUILLA1|CC901097473",
+          "logginData": {
+            "sourceSystemId": "",
+            "destinationSystemId": ""
+          },
+          "destination": {
+            "namespace": "http://co/com/comfenalcovalle/esb/ws/ValidadorConsultaAfiliadosCaja",
+            "name": "ValidadorConsultaAfiliadosCaja",
+            "operation": "execute"
+          },
+          "securityCredential": {
+            "userName": "",
+            "userToken": ""
+          },
+          "classification": { "classification": "" }
         },
-        "destination": {
-          "namespace": "http://co/com/comfenalcovalle/esb/ws/ValidadorConsultaAfiliadosCaja",
-          "name": "ValidadorConsultaAfiliadosCaja",
-          "operation": "execute"
-        },
-        "securityCredential": {
-          "userName": "",
-          "userToken": ""
-        },
-        "classification": { "classification": "" }
-      },
-      "body": {
-        "request": {
-          "consultaAfiliadoRequest": {
-            "abreviatura": arguments[0],
-            "identificacion": arguments[1]
+        "body": {
+          "request": {
+            "consultaAfiliadoRequest": {
+              "abreviatura": tipo,
+              "identificacion": cedula
+            }
           }
         }
       }
     }
+
+    this.request.post(
+      {
+        "headers": { "content-type": "application/json" },
+        "url": this.servicio,
+        "body": JSON.stringify(this.cuerpo)
+      }, (error, response, body) => {
+        if (error) {
+          return console.dir(error);
+        }
+        if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
+          this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
+          this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
+
+        } else {
+          this.tipoDocumento = '';
+
+        }
+      });
   }
-
-  Request.post({
-    "headers": { "content-type": "application/json" },
-    "url": servicio,
-    "body": JSON.stringify(cuerpo)
-  }, (error, response, body) => {
-    if (error) {
-      return console.dir(error);
-    }
-
-    if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
-      tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
-      fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
-
-    } else {
-      tipoDocumento = '';
-
-    });
 }

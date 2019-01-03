@@ -4,7 +4,7 @@ import request = require('request');
 import { User } from "./classes/User";
 let messagesToSend = require("./classes/messagesToSend");
 let utilities = require("./classes/utilities");
-let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
+import servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 
 let app = express();
 let url: string = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
@@ -44,7 +44,7 @@ app.post('/my_webhook_url2', (req, res) => {
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
         //subFlow();
-        servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
+        servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", 1107063182);
     });
 
     res.sendStatus(200); //Response does not matter
