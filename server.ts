@@ -44,20 +44,18 @@ app.post('/my_webhook_url2', (req, res) => {
     console.log('ELEMENT', data);
     utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
         //subFlow();
-        setTimeout(() => {
-            //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-            console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182")));
+        //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
+        console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182")));
+        
+        //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
+        let datos = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
 
-            //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-            let datos = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
-
-            console.log("BODY__>__>__>__>", data.body.responseMessageOut.body);
-            if (data.body.responseMessageOut.body) {
-                console.log("Existe");
-            } else {
-                console.log("No existe");
-            }
-        }, 2000);
+        console.log("BODY__>__>__>__>", data.body.responseMessageOut.body);
+        if(data.body.responseMessageOut.body){
+            console.log("Existe");
+        }else{
+            console.log("No existe"); 
+        }
     });
 
     res.sendStatus(200); //Response does not matter
