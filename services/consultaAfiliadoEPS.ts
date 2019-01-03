@@ -68,6 +68,6 @@ export class servicioAfiliadoEPS {
 
         }
       });
-      return this.reponse;
+      return JSON.parse(this.reponse);
   }
 }
