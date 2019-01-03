@@ -6,7 +6,7 @@ var request = require("request");
 var User_1 = require("./classes/User");
 var messagesToSend = require("./classes/messagesToSend");
 var utilities = require("./classes/utilities");
-var servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS.js");
+var servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 var app = express();
 var url = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
 var users = [];

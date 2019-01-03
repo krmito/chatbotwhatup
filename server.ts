@@ -4,7 +4,7 @@ import request = require('request');
 import { User } from "./classes/User";
 let messagesToSend = require("./classes/messagesToSend");
 let utilities = require("./classes/utilities");
-let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS.js");
+let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 
 
 let app = express();
@@ -117,7 +117,7 @@ function subFlow() {
             });
 
             res.sendStatus(200); //Response does not matter
-            
+
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
