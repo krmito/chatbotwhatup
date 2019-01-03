@@ -75,7 +75,7 @@ export class servicioAfiliadoEPS {
   static servicioQuemado(){
     let res;
 
-    res = `{
+    return res = `{
       "statusCode": 200,
       "body": {
         "responseMessageOut": {
