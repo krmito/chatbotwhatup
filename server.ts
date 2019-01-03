@@ -116,7 +116,6 @@ function subFlow() {
                 servicioAfiliadoEPS.armaObjetos("CC","1107063182");
             });
 
-            res.sendStatus(200); //Response does not matter
 
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {

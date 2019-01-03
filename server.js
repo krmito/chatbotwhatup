@@ -105,7 +105,6 @@ function subFlow() {
             utilities.functionWithCallBack(validaDoc(), 1000).then(function (res) {
                 servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
             });
-            res.sendStatus(200); //Response does not matter
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
