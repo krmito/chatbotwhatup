@@ -72,7 +72,7 @@ export class servicioAfiliadoEPS {
       return this.response;
   }
 
-  static servicioQuemado(){
+  static servicioQuemado(tipo:string, cedula:string){
     let res;
 
     return res = `{
