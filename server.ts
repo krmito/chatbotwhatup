@@ -45,16 +45,16 @@ app.post('/my_webhook_url2', (req, res) => {
     utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
         //subFlow();
         //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-        console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182")));
-        
+        console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
+
         //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-        let datos = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
+        let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
 
         console.log("BODY__>__>__>__>", data.body.responseMessageOut.body);
-        if(datos.body.responseMessageOut.body){
+        if (datos.body.responseMessageOut.body) {
             console.log("Existe");
-        }else{
-            console.log("No existe"); 
+        } else {
+            console.log("No existe");
         }
     });
 
