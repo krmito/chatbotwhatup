@@ -55,9 +55,9 @@ export class servicioAfiliadoEPS {
         this.response = JSON.parse(response.body);
         //console.log("Response_>_>" + JSON.stringify(this.response));
       
-        if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
-          this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
-          this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
+        if (this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
+          this.tipoDocumento = this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
+          this.fechaExpedicion = this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
 
           console.log("CC: " , this.tipoDocumento , " Fecha expedición: " , this.fechaExpedicion);
           

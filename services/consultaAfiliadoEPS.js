@@ -46,9 +46,9 @@ var servicioAfiliadoEPS = /** @class */ (function () {
         }, function (error, response, body) {
             _this.response = JSON.parse(response.body);
             //console.log("Response_>_>" + JSON.stringify(this.response));
-            if (JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
-                _this.tipoDocumento = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
-                _this.fechaExpedicion = JSON.parse(response.body).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
+            if (_this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
+                _this.tipoDocumento = _this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
+                _this.fechaExpedicion = _this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
                 console.log("CC: ", _this.tipoDocumento, " Fecha expedición: ", _this.fechaExpedicion);
             }
             else {
