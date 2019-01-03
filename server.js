@@ -120,7 +120,7 @@ function subFlow() {
                     users.push(user);
                 }
             }
-            //servicioAfiliadoEPS.armaObjetos("CC","1107063182");
+            servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
                     users.splice(index, 1);
