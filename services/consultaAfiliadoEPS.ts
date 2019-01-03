@@ -66,7 +66,6 @@ export class servicioAfiliadoEPS {
           
         } else {
           this.tipoDocumento = '';
-
         }
       });
       return this.response;
