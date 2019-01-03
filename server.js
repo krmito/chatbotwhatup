@@ -42,7 +42,9 @@ app.post('/my_webhook_url2', function (req, res) {
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
         //subFlow();
-        console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", 1107063182));
+        setTimeout(function () {
+            console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", 1107063182));
+        }, 2000);
     });
     res.sendStatus(200); //Response does not matter
 });
