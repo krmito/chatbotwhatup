@@ -6,7 +6,6 @@ let messagesToSend = require("./classes/messagesToSend");
 let utilities = require("./classes/utilities");
 let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 
-
 let app = express();
 let url: string = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
 let users: Array<any> = [];
@@ -44,7 +43,8 @@ app.post('/my_webhook_url2', (req, res) => {
 
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
-        subFlow();
+        //subFlow();
+        servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
     });
 
     res.sendStatus(200); //Response does not matter
@@ -111,11 +111,27 @@ function subFlow() {
                     users.push(user);
                 }
             }
-            //Validar número de documento
-            utilities.functionWithCallBack(validaDoc(), 1000).then(res => {
-                servicioAfiliadoEPS.armaObjetos("CC","1107063182");
-            });
 
+            if (element.state == 'citasSubFlow1') {
+                console.log('this is happening');
+                if (input.match(/([^a-zA-Z])/g)) {
+                    users.splice(index, 1);
+                    documentNumber = parseInt(input);
+                    console.log('Cant tell man');
+                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User(chatId, message, 'citasSubFlow2')
+                    sendMessage(user);
+                    users.push(user);
+                } else {
+                    console.log('HEY BRO!!!!!');
+                    users.splice(index, 1);
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = new User(chatId, message, 'citasSubFlow1');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
+            
 
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
@@ -141,10 +157,10 @@ function subFlow() {
                     const element = DiasDisponibles[indices];
                     console.log(indices);
                     console.log(DiasDisponibles[indices]);
-                    if (Number(indices-1) == Number(input)) {
+                    if (Number(indices - 1) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices-1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
@@ -155,9 +171,9 @@ function subFlow() {
             if (element.state == 'eligeCita2') {
                 horasDisponibles.forEach((element, indice2) => {
 
-                    if (Number(indice2-1) == Number(input)) {
+                    if (Number(indice2 - 1) == Number(input)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2-1]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
                         user = new User(chatId, message, 'eligeCita3');
                         sendMessage(user);
                         users.push(user);
@@ -205,7 +221,7 @@ let server = app.listen(process.env.PORT, function () {
 });
 
 
-function validaDoc(){
+function validaDoc() {
     if (element.state == 'citasSubFlow1') {
         console.log('this is happening');
         if (input.match(/([^a-zA-Z])/g)) {

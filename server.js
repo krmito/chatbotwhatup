@@ -41,7 +41,8 @@ app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
     utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
-        subFlow();
+        //subFlow();
+        servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
     });
     res.sendStatus(200); //Response does not matter
 });
@@ -101,10 +102,26 @@ function subFlow() {
                     users.push(user);
                 }
             }
-            //Validar número de documento
-            utilities.functionWithCallBack(validaDoc(), 1000).then(function (res) {
-                servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
-            });
+            if (element.state == 'citasSubFlow1') {
+                console.log('this is happening');
+                if (input.match(/([^a-zA-Z])/g)) {
+                    users.splice(index, 1);
+                    documentNumber = parseInt(input);
+                    console.log('Cant tell man');
+                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User_1.User(chatId, message, 'citasSubFlow2');
+                    sendMessage(user);
+                    users.push(user);
+                }
+                else {
+                    console.log('HEY BRO!!!!!');
+                    users.splice(index, 1);
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = new User_1.User(chatId, message, 'citasSubFlow1');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
