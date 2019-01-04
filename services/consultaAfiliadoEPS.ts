@@ -65,6 +65,8 @@ export class servicioAfiliadoEPS {
           this.tipoDocumento = '';
         }
       });
+      console.log("RESPONSE_>_>>_>>>>",  this.response);
+      
       return this.response;
   }
 
