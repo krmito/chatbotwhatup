@@ -106,11 +106,11 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
                     users.splice(index, 1);
                     documentNumber = parseInt(input);
-                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                    user = new User_1.User(chatId, message, 'citasSubFlow2');
                     //Consultar cédula
                     console.log(input);
-                    utilities.utilities.functionWithCallBack(consultarServicio("CC", Number(input)), 1000).then(function (res) {
+                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 1000).then(function (res) {
+                        message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                        user = new User_1.User(chatId, message, 'citasSubFlow2');
                         sendMessage(user);
                     });
                     users.push(user);
