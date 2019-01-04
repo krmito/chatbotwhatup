@@ -122,8 +122,8 @@ function subFlow() {
                     
                     //Consultar cédula
                     console.log(input);
-                    utilities.utilities.functionWithCallBack(sendMessage(user), 2000).then(res => {
-                        consultarServicio("CC", Number(input));
+                    utilities.utilities.functionWithCallBack(consultarServicio("CC", Number(input)), 1000).then(res => {
+                        sendMessage(user)
                     });
                     users.push(user);
                 } else {
