@@ -9,6 +9,9 @@ var messagesToSend = {
             case 'citaInicial':
                 mensaje = "Por favor " + userName + " escoje el tipo de documento: \n*1.C\u00E9dula de ciudadan\u00EDa*\n*2.Pasaporte* \n*3.Tarjeta de identidad* \n*4.Cancelar* \u23F9\uFE0F";
                 break;
+            case 'citaInicial1':
+                mensaje = userName + " que tipo de cita quieres que se te agende\n      *1.General*\n      *2.Odontologia* ";
+                break;
             case 'certificados':
                 mensaje = "Por favor " + userName + " digite su numero de cedula sin puntos ni comas";
                 break;

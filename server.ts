@@ -68,7 +68,6 @@ function checkMessage() {
 
 
     console.log('users', users);
-
     if (users.find(userValue => userValue.chatId == chatId)) {
         if (!fromMe) {
             if (saludosInicial.find(valueSaludo1 => valueSaludo1 == input)) {
@@ -79,8 +78,7 @@ function checkMessage() {
                 sendMessage(user);
 
             } else if (citaInicial1.find(valueCita => utilities.utilities.isContain(input, valueCita))) {
-                console.log('hey mans ');
-
+                
                 message = messagesToSend.newMessage('citaInicial1', senderName);
                 user = users.find(userValue => userValue.chatId == chatId);
                 user.state = 'citaInicial1';
@@ -113,7 +111,7 @@ function subFlow() {
             if (user.state == 'citaInicial1') {
                 if (citaInicial2.find(response => utilities.utilities.isContain(input, response))) {
 
-                    console.log('Cant tell man');
+                    
                     message = messagesToSend.newMessage('citaInicial2', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citaInicial2';
@@ -123,7 +121,7 @@ function subFlow() {
             } else if (user.state == 'citaInicial2') {
                 if (tipoDocumento.find(response => utilities.utilities.isContain(input, response))) {
 
-                    console.log('Cant tell man');
+                    
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citasSubFlow1';
@@ -135,15 +133,13 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
 
                     documentNumber = parseInt(input);
-                    console.log('Cant tell man');
+                    
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citasSubFlow2';
                     user.body = message;
                     sendMessage(user);
                 } else {
-                    console.log('HEY BRO!!!!!');
-
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citasSubFlow1';

@@ -20,6 +20,11 @@ let messagesToSend = {
 *3.Tarjeta de identidad* 
 *4.Cancelar* ⏹️`;
         break;
+      case 'citaInicial1':
+        mensaje = `${userName} que tipo de cita quieres que se te agende
+      *1.General*
+      *2.Odontologia* `;
+        break;
       case 'certificados':
         mensaje = `Por favor ${userName} digite su numero de cedula sin puntos ni comas`;
         break;

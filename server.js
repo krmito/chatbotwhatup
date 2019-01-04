@@ -71,7 +71,6 @@ function checkMessage() {
                 sendMessage(user);
             }
             else if (citaInicial1.find(function (valueCita) { return utilities.utilities.isContain(input, valueCita); })) {
-                console.log('hey mans ');
                 message = messagesToSend.newMessage('citaInicial1', senderName);
                 user = users.find(function (userValue) { return userValue.chatId == chatId; });
                 user.state = 'citaInicial1';
@@ -101,7 +100,6 @@ function subFlow() {
             //Ingresa l tipo de documento
             if (user.state == 'citaInicial1') {
                 if (citaInicial2.find(function (response) { return utilities.utilities.isContain(input, response); })) {
-                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citaInicial2', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
                     user.state = 'citaInicial2';
@@ -111,7 +109,6 @@ function subFlow() {
             }
             else if (user.state == 'citaInicial2') {
                 if (tipoDocumento.find(function (response) { return utilities.utilities.isContain(input, response); })) {
-                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
                     user.state = 'citasSubFlow1';
@@ -123,7 +120,6 @@ function subFlow() {
                 console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
                     documentNumber = parseInt(input);
-                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
                     user.state = 'citasSubFlow2';
@@ -131,7 +127,6 @@ function subFlow() {
                     sendMessage(user);
                 }
                 else {
-                    console.log('HEY BRO!!!!!');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
                     user.state = 'citasSubFlow1';
