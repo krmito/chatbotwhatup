@@ -199,7 +199,7 @@ var server = app.listen(process.env.PORT, function () {
 });
 function consultarServicio(tipo, cedula) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
+    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS);
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     var datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
     console.log("BODY__>__>__>__>", datos.body.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
