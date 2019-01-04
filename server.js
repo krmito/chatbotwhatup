@@ -109,12 +109,13 @@ function subFlow() {
                     documentNumber = parseInt(input);
                     //Consultar cédula
                     console.log(input);
-                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
-                        console.log("resssss", res);
-                        message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                        user = new User_1.User(chatId, message, 'citasSubFlow2');
-                        sendMessage(user);
-                    });
+                    // utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
+                    var valor = consultarServicio("CC", documentNumber);
+                    console.log("BOOLENAO: ", valor);
+                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User_1.User(chatId, message, 'citasSubFlow2');
+                    sendMessage(user);
+                    //});
                     users.push(user);
                 }
                 else {
