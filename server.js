@@ -204,9 +204,9 @@ function consultarServicio(tipo, cedula) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-    servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, datos = function (x) {
+    servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x) {
         console.log('YOLO--------->', x);
-        return x;
+        datos = x;
     });
     console.log("BODY__>__>__>__>", datos);
     if (datos != undefined) {
