@@ -112,9 +112,9 @@ function subFlow() {
                     sendMessage(user);
                     users.push(user);
                     //Consultar cédula
-                    utilities.utilities.functionWithCallBack(subFlow(), 1000).then(function (res) {
+                    console.log(input);
+                    utilities.utilities.functionWithCallBack(subFlow(), 2000).then(function (res) {
                         existeAfiliado = consultarServicio("CC", Number(input));
-                        console.log("EXISTE CÉDULA:_>_>_>", existeAfiliado);
                     });
                 }
                 else {
