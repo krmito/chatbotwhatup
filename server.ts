@@ -219,7 +219,7 @@ let server = app.listen(process.env.PORT, function () {
 
 function consultarServicio(tipo: string, cedula: number) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS);
+    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS);
 
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
