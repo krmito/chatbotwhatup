@@ -106,6 +106,13 @@ function subFlow() {
                     user.body = message;
                     sendMessage(user);
                 }
+                else {
+                    message = messagesToSend.newMessage('eligeCita7', senderName);
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'citaInicial1';
+                    user.body = message;
+                    sendMessage(user);
+                }
             }
             else if (user.state == 'citaInicial2') {
                 if (tipoDocumento.find(function (response) { return utilities.utilities.isContain(input, response); })) {

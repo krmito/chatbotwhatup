@@ -117,6 +117,12 @@ function subFlow() {
                     user.state = 'citaInicial2';
                     user.body = message;
                     sendMessage(user);
+                }else{
+                    message = messagesToSend.newMessage('eligeCita7', senderName);
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'citaInicial1';
+                    user.body = message;
+                    sendMessage(user);
                 }
             } else if (user.state == 'citaInicial2') {
                 if (tipoDocumento.find(response => utilities.utilities.isContain(input, response))) {
