@@ -144,13 +144,6 @@ function subFlow() {
                     });
                     users.push(user);
                 }
-                else {
-                    users.splice(index, 1);
-                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
-                    user = new User_1.User(chatId, message, 'citasSubFlow1');
-                    sendMessage(user);
-                    users.push(user);
-                }
             }
             console.log("VALIDACIÓN: " + existeAfiliado);
             if (element.state == 'eligeCita1' && existeAfiliado) {
