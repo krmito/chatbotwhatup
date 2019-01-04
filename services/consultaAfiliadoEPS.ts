@@ -5,13 +5,13 @@ export class servicioAfiliadoEPS {
   static request = require('request');
   static tipoDocumento: string = "";
   static fechaExpedicion: string = "";
-  static response:any;
-  constructor() {}
+  static response: any;
+  constructor() { }
 
-  static armaObjetos(tipo:string, cedula:number):any {
+  static armaObjetos(tipo: string, cedula: number): any {
 
-    console.log("Tipo: " , tipo , " cédula: " , cedula);
-    
+    console.log("Tipo: ", tipo, " cédula: ", cedula);
+
     this.cuerpo = {
       "requestMessageOut": {
         "header": {
@@ -45,32 +45,35 @@ export class servicioAfiliadoEPS {
       }
     }
     console.log("Cuerpo: " + JSON.stringify(this.cuerpo));
+    let x;
     this.request.post(
       {
         "headers": { "content-type": "application/json" },
         "url": this.servicio,
         "body": JSON.stringify(this.cuerpo)
-      }, (error:any, response:any, body:any) => {
-        
+      }, (error: any, response: any, body: any) => {
+
         this.response = JSON.parse(response.body);
         //console.log("Response_>_>" + JSON.stringify(this.response));
-      
+
         if (this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
           this.tipoDocumento = this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
           this.fechaExpedicion = this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
 
-          console.log("CC: " , this.tipoDocumento , " Fecha expedición: " , this.fechaExpedicion);
-          
+          console.log("CC: ", this.tipoDocumento, " Fecha expedición: ", this.fechaExpedicion);
+
         } else {
           this.tipoDocumento = '';
         }
-        console.log("RESPONSE_>_>>_>>>>",  this.response);
-        return this.response;
+        console.log("RESPONSE_>_>>_>>>>", this.response);
+        x = this.response;
+
       });
-      
+    return x;
+
   }
 
-  static servicioQuemado(tipo:string, cedula:string){
+  static servicioQuemado(tipo: string, cedula: string) {
     let res;
 
     return res = `{

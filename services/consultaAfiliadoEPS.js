@@ -39,6 +39,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
             }
         };
         console.log("Cuerpo: " + JSON.stringify(this.cuerpo));
+        var x;
         this.request.post({
             "headers": { "content-type": "application/json" },
             "url": this.servicio,
@@ -55,8 +56,9 @@ var servicioAfiliadoEPS = /** @class */ (function () {
                 _this.tipoDocumento = '';
             }
             console.log("RESPONSE_>_>>_>>>>", _this.response);
-            return _this.response;
+            x = _this.response;
         });
+        return x;
     };
     servicioAfiliadoEPS.servicioQuemado = function (tipo, cedula) {
         var res;
