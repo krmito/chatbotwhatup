@@ -223,7 +223,7 @@ function consultarServicio(tipo: string, cedula: number) {
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
 
-    console.log("BODY__>__>__>__>", datos.body);
+    console.log("BODY__>__>__>__>", datos);
     console.log("BODY__>__>__>__>", datos.body.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
     /* if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
