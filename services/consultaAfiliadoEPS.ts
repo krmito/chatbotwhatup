@@ -64,10 +64,10 @@ export class servicioAfiliadoEPS {
         } else {
           this.tipoDocumento = '';
         }
+        console.log("RESPONSE_>_>>_>>>>",  this.response);
+        return this.response;
       });
-      console.log("RESPONSE_>_>>_>>>>",  this.response);
       
-      return this.response;
   }
 
   static servicioQuemado(tipo:string, cedula:string){
