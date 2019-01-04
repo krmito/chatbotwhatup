@@ -13,7 +13,7 @@ let messagesToSend = {
 *4.Citas* 📅
 *5.Cancelar* ⏹️`;
         break;
-      case 'citaInicial':
+      case 'citaInicial2':
         mensaje = `Por favor ${userName} escoje el tipo de documento: 
 *1.Cédula de ciudadanía*
 *2.Pasaporte* 

@@ -6,7 +6,7 @@ var messagesToSend = {
             case 'saludoInicial':
                 mensaje = "Hola, " + userName + " Bienvenido a la linea de atencion de *Comfenalco*.\n        Por favor dime en que quieres que te ayude utiliza una de las palabras claves: \n*1.Certificados* \uD83D\uDCC4\n*2.Afiliacion* \uD83C\uDD98\n*3.Subsidios* \uD83D\uDCB5\n*4.Citas* \uD83D\uDCC5\n*5.Cancelar* \u23F9\uFE0F";
                 break;
-            case 'citaInicial':
+            case 'citaInicial2':
                 mensaje = "Por favor " + userName + " escoje el tipo de documento: \n*1.C\u00E9dula de ciudadan\u00EDa*\n*2.Pasaporte* \n*3.Tarjeta de identidad* \n*4.Cancelar* \u23F9\uFE0F";
                 break;
             case 'citaInicial1':
