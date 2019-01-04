@@ -212,6 +212,15 @@ function subFlow() {
                 }
             }
 
+            if (element.state == 'eligeCita5') {
+                if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
+                    message = messagesToSend.newMessage('saludoInicial', senderName);
+                    user = new User(chatId, message, 'saludoInicial');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
+
         }
     });
 }
