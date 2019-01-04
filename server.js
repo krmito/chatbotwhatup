@@ -205,7 +205,7 @@ function consultarServicio(tipo, cedula) {
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x) {
         console.log('YOLO--------->', x);
-        var datos = x;
+        datos = x;
     });
     /* utilities.utilities.functionWithCallBack(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula),1000).then(res=>{
         console.log('res-> ',res);
