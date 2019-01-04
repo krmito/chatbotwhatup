@@ -142,6 +142,8 @@ function subFlow() {
                     users.push(user);
                 }
             }
+            console.log(existeAfiliado);
+            
 
             if (existeAfiliado) {
                 //Validda la fecha de expedición
