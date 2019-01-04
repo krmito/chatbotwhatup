@@ -23,6 +23,7 @@ let senderName: string;
 let chatId: string;
 let fromMe: boolean;
 let existeAfiliado: boolean = false;
+let datos: any;
 
 let DiasDisponibles = [
     "Martes",
@@ -223,9 +224,9 @@ function consultarServicio(tipo: string, cedula: number) {
   //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
 
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-    let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function(x:any){
+     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function(x:any){
         console.log('YOLO--------->',x);
-        return x;
+        let datos = x;
     });
     /* utilities.utilities.functionWithCallBack(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula),1000).then(res=>{
         console.log('res-> ',res);
