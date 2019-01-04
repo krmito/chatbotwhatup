@@ -123,10 +123,6 @@ function subFlow() {
                     user = new User(chatId, message, 'citasSubFlow2')
                     sendMessage(user)
                     users.push(user);
-                } else {
-                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                    user = new User(chatId, message, 'citasSubFlow1');
-                    sendMessage(user);
                 }
             }
 
@@ -136,8 +132,10 @@ function subFlow() {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
                     users.splice(index, 1);
                     documentDate = input;
-                    console.log("Número de documento: " + documentNumber);
 
+                    console.log(documentNumber);
+
+                    //Consultar cédula
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
 
 
@@ -160,7 +158,6 @@ function subFlow() {
                             user = new User(chatId, message, 'citasSubFlow1')
                             sendMessage(user)
                         }
-
                     });
                     users.push(user);
                 } else {
@@ -171,7 +168,10 @@ function subFlow() {
                     users.push(user);
                 }
             }
+
+
             if (existeAfiliado) {
+
                 if (element.state == 'eligeCita1') {
 
                     for (let indices = 0; indices < DiasDisponibles.length; indices++) {

@@ -113,18 +113,14 @@ function subFlow() {
                     sendMessage(user);
                     users.push(user);
                 }
-                else {
-                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                    user = new User_1.User(chatId, message, 'citasSubFlow1');
-                    sendMessage(user);
-                }
             }
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
                     users.splice(index, 1);
                     documentDate = input;
-                    console.log("Número de documento: " + documentNumber);
+                    console.log(documentNumber);
+                    //Consultar cédula
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
                         console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
                         if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
