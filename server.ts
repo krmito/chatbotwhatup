@@ -124,7 +124,7 @@ function subFlow() {
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
 
                         console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
-                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse != "") {
+                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse != "{}") {
                             console.log("Existe");
                             existeAfiliado = true;
                         }
