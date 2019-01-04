@@ -22,7 +22,7 @@ let diasDisponibles: Array<string> = [];
 let senderName: string;
 let chatId: string;
 let fromMe: boolean;
-let existeAfiliado: boolean = false;
+let existeAfiliado: boolean;
 let datos: any;
 
 let DiasDisponibles = [
@@ -154,6 +154,7 @@ function subFlow() {
                             user = new User(chatId, message, 'eligeCita1')
                             sendMessage(user)
                         } else {
+                            existeAfiliado = false;
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
                             user = new User(chatId, message, 'citasSubFlow1')
                             sendMessage(user)
@@ -168,7 +169,7 @@ function subFlow() {
                     users.push(user);
                 }
             }
-
+            console.log("VALIDACIÓN: " + existeAfiliado);
             if (element.state == 'eligeCita1' && existeAfiliado) {
                 for (let indices = 0; indices < DiasDisponibles.length; indices++) {
                     const element = DiasDisponibles[indices];

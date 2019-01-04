@@ -23,7 +23,7 @@ var diasDisponibles = [];
 var senderName;
 var chatId;
 var fromMe;
-var existeAfiliado = false;
+var existeAfiliado;
 var datos;
 var DiasDisponibles = [
     "Martes",
@@ -136,6 +136,7 @@ function subFlow() {
                             sendMessage(user);
                         }
                         else {
+                            existeAfiliado = false;
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
                             user = new User_1.User(chatId, message, 'citasSubFlow1');
                             sendMessage(user);
@@ -151,6 +152,7 @@ function subFlow() {
                     users.push(user);
                 }
             }
+            console.log("VALIDACIÓN: " + existeAfiliado);
             if (element.state == 'eligeCita1' && existeAfiliado) {
                 for (var indices = 0; indices < DiasDisponibles.length; indices++) {
                     var element_1 = DiasDisponibles[indices];
