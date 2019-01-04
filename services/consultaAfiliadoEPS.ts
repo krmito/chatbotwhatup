@@ -52,6 +52,7 @@ export class servicioAfiliadoEPS {
         "url": this.servicio,
         "body": JSON.stringify(this.cuerpo)
       }, (error: any, response: any, body: any) => {
+        console.log('THIS IS THE BODY: ', body);
 
         this.response = JSON.parse(response.body);
         //console.log("Response_>_>" + JSON.stringify(this.response));
