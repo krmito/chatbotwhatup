@@ -112,6 +112,7 @@ function subFlow() {
                     console.log(input);
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
                         console.log("BOOLENAO: ", res);
+                        console.log("BOOLENAO: ", datos);
                         message = messagesToSend.newMessage('citasSubFlow2', senderName);
                         user = new User_1.User(chatId, message, 'citasSubFlow2');
                         sendMessage(user);
@@ -204,9 +205,9 @@ function consultarServicio(tipo, cedula) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-    datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x) {
+    servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x) {
         console.log('YOLO--------->', x);
-        return x;
+        datos = x;
     });
     console.log("BODY__>__>__>__>", datos);
     if (datos != undefined) {
