@@ -9,7 +9,7 @@ var utilities = require("./classes/utilities");
 var servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 /* let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS"); */
 var app = express();
-var url = 'https://eu11.chat-api.com/instance20204/sendMessage?token=linoijx5h4glyl4b';
+var url = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
 var users = [];
 var user;
 var data;
@@ -39,7 +39,7 @@ var arregloDias = [];
 ;
 var existeAfiliado;
 app.use(bodyParser.json());
-app.post('/my_webhook_url', function (req, res) {
+app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
     //servicioAfiliadoEPS.armaObjetos("CC", "1107063182")
