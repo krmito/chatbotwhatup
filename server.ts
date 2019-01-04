@@ -120,6 +120,8 @@ function subFlow() {
                     //Consultar cédula
                     console.log(input);
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
+                        console.log("resssss",res);
+                        
                         message = messagesToSend.newMessage('citasSubFlow2', senderName);
                         user = new User(chatId, message, 'citasSubFlow2')
                         sendMessage(user)
@@ -228,6 +230,7 @@ function consultarServicio(tipo: string, cedula: number) {
     }) */
 
     console.log("BODY__>__>__>__>", datos);
+    return datos;
     //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
     /* if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
