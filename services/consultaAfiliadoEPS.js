@@ -4,7 +4,6 @@ var servicioAfiliadoEPS = /** @class */ (function () {
     function servicioAfiliadoEPS() {
     }
     servicioAfiliadoEPS.armaObjetos = function (tipo, cedula, callback) {
-        var _this = this;
         console.log("Tipo: ", tipo, " cédula: ", cedula);
         this.cuerpo = {
             "requestMessageOut": {
@@ -46,13 +45,12 @@ var servicioAfiliadoEPS = /** @class */ (function () {
         }, function (error, response, body) {
             console.log('THIS IS THE BODY: ', body);
             if (!error && response.statusCode == 200) {
-                _this.armaObjetos(tipo, cedula, callback(body));
+                callback(body);
             }
             else {
                 console.log(error);
             }
         });
-        return callback;
     };
     servicioAfiliadoEPS.servicioQuemado = function (tipo, cedula) {
         var res;

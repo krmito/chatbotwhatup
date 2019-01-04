@@ -54,15 +54,14 @@ export class servicioAfiliadoEPS {
         console.log('THIS IS THE BODY: ', body);
 
         if (!error && response.statusCode == 200) {
-          this.armaObjetos(tipo, cedula, callback(body));
-        } else {
+          callback(body);
+        }
+        else {
           console.log(error);
         }
 
 
       });
-    return callback;
-
   }
 
   static servicioQuemado(tipo: string, cedula: string) {
