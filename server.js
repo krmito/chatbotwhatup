@@ -108,7 +108,7 @@ function subFlow() {
                     documentNumber = parseInt(input);
                     //Consultar cédula
                     console.log(input);
-                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 1000).then(function (res) {
+                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
                         message = messagesToSend.newMessage('citasSubFlow2', senderName);
                         user = new User_1.User(chatId, message, 'citasSubFlow2');
                         sendMessage(user);
@@ -199,14 +199,14 @@ var server = app.listen(process.env.PORT, function () {
 });
 function consultarServicio(tipo, cedula) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
+    //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-    var datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
+    //let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
     utilities.utilities.functionWithCallBack(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula), 1000).then(function (res) {
         console.log('res-> ', res);
     });
-    console.log("BODY__>__>__>__>", datos);
-    console.log("BODY__>__>__>__>", datos.body.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
+    // console.log("BODY__>__>__>__>", datos);
+    //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
     /* if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
         return true;
