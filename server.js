@@ -41,8 +41,8 @@ app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
     utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
-        //subFlow();
-        consultarServicio();
+        subFlow();
+        /* consultarServicio(); */
     });
     res.sendStatus(200); //Response does not matter
 });
@@ -112,6 +112,9 @@ function subFlow() {
                     user = new User_1.User(chatId, message, 'citasSubFlow2');
                     sendMessage(user);
                     users.push(user);
+                    utilities.utilities.functionWithCallBack(subFlow(), 1000).then(function (res) {
+                        consultarServicio("CC", Number(input));
+                    });
                 }
                 else {
                     console.log('HEY BRO!!!!!');
@@ -195,11 +198,11 @@ var server = app.listen(process.env.PORT, function () {
     var port = server.address().port;
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
-function consultarServicio() {
+function consultarServicio(tipo, cedula) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182"));
+    console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-    var datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos("CC", "1107063182");
+    var datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
     console.log("BODY__>__>__>__>", data.body.responseMessageOut.body.response);
     if (datos.responseMessageOut.body) {
         console.log("Existe");
