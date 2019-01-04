@@ -100,7 +100,7 @@ function checkMessega() {
 }
 
 function subFlow() {
-    let valor:any;
+    let valor: any;
     users.forEach((element, index) => {
         console.log("Estado: ", element.state);
         if (!fromMe) {
@@ -122,7 +122,7 @@ function subFlow() {
                     //Consultar cédula
                     console.log(input);
                     utilities.utilities.functionWithCallBack(valor = consultarServicio("CC", documentNumber), 4000).then(res => {
-                        
+
                         console.log("BOOLENAO: ", valor);
 
                         message = messagesToSend.newMessage('citasSubFlow2', senderName);
@@ -222,7 +222,6 @@ let server = app.listen(process.env.PORT, function () {
 });
 
 function consultarServicio(tipo: string, cedula: number) {
-    let respuesta: boolean = false;
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
 
@@ -230,13 +229,11 @@ function consultarServicio(tipo: string, cedula: number) {
     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x: any) {
         console.log('YOLO--------->', x);
         datos = x;
-
-        console.log("BODY__>__>__>__>", datos);
-        if (datos != undefined) {
-            console.log("Existe");
-            return respuesta = true;
-        }
     });
-
+    console.log("BODY__>__>__>__>", datos);
+    if (datos != undefined) {
+        console.log("Existe");
+        return true;
+    }
 
 }
