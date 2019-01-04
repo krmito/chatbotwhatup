@@ -135,7 +135,6 @@ function subFlow() {
                     users.push(user);
                 }
             }
-
             //Validda la fecha de expedición
             if (element.state == 'citasSubFlow2') {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
@@ -198,8 +197,8 @@ function subFlow() {
                     users.push(user);
                 }
             }
+
         }
-    }
     });
 }
 
