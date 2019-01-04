@@ -119,8 +119,27 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
                     users.splice(index, 1);
                     documentNumber = parseInt(input);
-                    //Consultar cédula
-                    console.log(input);
+                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User(chatId, message, 'citasSubFlow2')
+                    sendMessage(user)
+                    users.push(user);
+                } else {
+                    console.log('HEY BRO!!!!!');
+                    users.splice(index, 1);
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = new User(chatId, message, 'citasSubFlow1');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
+
+
+            //Validda la fecha de expedición
+            if (element.state == 'citasSubFlow2') {
+                if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
+                    users.splice(index, 1);
+                    documentDate = input;
+
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
                         let afiliado = JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado;
 
@@ -135,8 +154,8 @@ function subFlow() {
                             console.log("Existe");
                             existeAfiliado = true;
 
-                            message = messagesToSend.newMessage('citasSubFlow2', senderName, null, null, object);
-                            user = new User(chatId, message, 'citasSubFlow2')
+                            message = messagesToSend.newMessage('eligeCita1', senderName, null, null, object);
+                            user = new User(chatId, message, 'eligeCita1')
                             sendMessage(user)
                         } else {
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
@@ -147,37 +166,14 @@ function subFlow() {
                     });
                     users.push(user);
                 } else {
-                    console.log('HEY BRO!!!!!');
                     users.splice(index, 1);
-                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
                     users.push(user);
                 }
             }
-            console.log(existeAfiliado);
-
-
             if (existeAfiliado) {
-                //Validda la fecha de expedición
-                if (element.state == 'citasSubFlow2') {
-                    if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                        users.splice(index, 1);
-                        documentDate = input;
-                        message = messagesToSend.newMessage('eligeCita1', senderName);
-                        user = new User(chatId, message, 'eligeCita1');
-
-                        sendMessage(user);
-                        users.push(user);
-                    } else {
-                        users.splice(index, 1);
-                        message = messagesToSend.newMessage('docInvalidoFecha', senderName);
-                        user = new User(chatId, message, 'citasSubFlow1');
-                        sendMessage(user);
-                        users.push(user);
-                    }
-                }
-
                 if (element.state == 'eligeCita1') {
 
                     for (let indices = 0; indices < DiasDisponibles.length; indices++) {

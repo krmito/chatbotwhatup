@@ -108,28 +108,9 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
                     users.splice(index, 1);
                     documentNumber = parseInt(input);
-                    //Consultar cédula
-                    console.log(input);
-                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
-                        var afiliado = JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado;
-                        console.log("BOOLENAO: ", afiliado);
-                        if (afiliado != undefined) {
-                            var calidadAfiliado = afiliado.calidadAfiliado;
-                            var fechaAfiliacion = afiliado.fechaAfiliacionSistema;
-                            var tipoAfiliado = afiliado.tipoAfiliado;
-                            var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
-                            console.log("Existe");
-                            existeAfiliado = true;
-                            message = messagesToSend.newMessage('citasSubFlow2', senderName, null, null, object);
-                            user = new User_1.User(chatId, message, 'citasSubFlow2');
-                            sendMessage(user);
-                        }
-                        else {
-                            message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                            user = new User_1.User(chatId, message, 'citasSubFlow1');
-                            sendMessage(user);
-                        }
-                    });
+                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                    user = new User_1.User(chatId, message, 'citasSubFlow2');
+                    sendMessage(user);
                     users.push(user);
                 }
                 else {
@@ -141,26 +122,42 @@ function subFlow() {
                     users.push(user);
                 }
             }
-            console.log(existeAfiliado);
-            if (existeAfiliado) {
-                //Validda la fecha de expedición
-                if (element.state == 'citasSubFlow2') {
-                    if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                        users.splice(index, 1);
-                        documentDate = input;
-                        message = messagesToSend.newMessage('eligeCita1', senderName);
-                        user = new User_1.User(chatId, message, 'eligeCita1');
-                        sendMessage(user);
-                        users.push(user);
-                    }
-                    else {
-                        users.splice(index, 1);
-                        message = messagesToSend.newMessage('docInvalidoFecha', senderName);
-                        user = new User_1.User(chatId, message, 'citasSubFlow1');
-                        sendMessage(user);
-                        users.push(user);
-                    }
+            //Validda la fecha de expedición
+            if (element.state == 'citasSubFlow2') {
+                if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
+                    users.splice(index, 1);
+                    documentDate = input;
+                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
+                        var afiliado = JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado;
+                        console.log("BOOLENAO: ", afiliado);
+                        if (afiliado != undefined) {
+                            var calidadAfiliado = afiliado.calidadAfiliado;
+                            var fechaAfiliacion = afiliado.fechaAfiliacionSistema;
+                            var tipoAfiliado = afiliado.tipoAfiliado;
+                            var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
+                            console.log("Existe");
+                            existeAfiliado = true;
+                            message = messagesToSend.newMessage('eligeCita1', senderName, null, null, object);
+                            user = new User_1.User(chatId, message, 'eligeCita1');
+                            sendMessage(user);
+                        }
+                        else {
+                            message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                            user = new User_1.User(chatId, message, 'citasSubFlow1');
+                            sendMessage(user);
+                        }
+                    });
+                    users.push(user);
                 }
+                else {
+                    users.splice(index, 1);
+                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
+                    user = new User_1.User(chatId, message, 'citasSubFlow1');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
+            if (existeAfiliado) {
                 if (element.state == 'eligeCita1') {
                     for (var indices = 0; indices < DiasDisponibles.length; indices++) {
                         var element_1 = DiasDisponibles[indices];
