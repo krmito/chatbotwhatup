@@ -185,7 +185,7 @@ function subFlow() {
                     }
                 }
             }
-
+            console.log("VALIDACIÓN2: " + existeAfiliado + "    ----     "  + element.state);
             if (element.state == 'eligeCita2' && existeAfiliado) {
                 horasDisponibles.forEach((element, indice2) => {
 
