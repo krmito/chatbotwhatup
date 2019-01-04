@@ -114,7 +114,6 @@ function subFlow() {
             }
 
             if (element.state == 'citasSubFlow1') {
-                console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
                     users.splice(index, 1);
                     documentNumber = parseInt(input);
@@ -126,7 +125,7 @@ function subFlow() {
                     //Consultar cédula
                     console.log(input);
                     utilities.utilities.functionWithCallBack(subFlow(), 2000).then(res => {
-                        existeAfiliado = consultarServicio("CC", Number(input));
+                        consultarServicio("CC", Number(input));
                     });
 
                 } else {
@@ -229,7 +228,7 @@ let server = app.listen(process.env.PORT, function () {
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
 
-function consultarServicio(tipo: string, cedula: number): boolean {
+function consultarServicio(tipo: string, cedula: number) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     //console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
 
@@ -237,11 +236,11 @@ function consultarServicio(tipo: string, cedula: number): boolean {
     let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
 
     console.log("BODY__>__>__>__>", datos.body.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
-    if (datos.responseMessageOut.body != undefined) {
+    /* if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
         return true;
     } else {
         console.log("No existe");
         return false;
-    }
+    } */
 }
