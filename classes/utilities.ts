@@ -4,7 +4,10 @@ export class utilities {
 
     static functionWithCallBack(functionX: any, timeout: number) {
         let promise = new Promise((resolve, reject) => {
+            console.log('entro1');
+            
             setTimeout(() => {
+            console.log('entro3');
                 functionX
                 resolve();
             }, timeout);

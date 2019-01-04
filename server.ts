@@ -235,5 +235,4 @@ function consultarServicio(tipo: string, cedula: number) {
         console.log("Existe");
         return true;
     }
-
 }
