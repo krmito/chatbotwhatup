@@ -124,13 +124,19 @@ function subFlow() {
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
 
                         console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
-                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse != "{}") {
+                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse != "") {
                             console.log("Existe");
                             existeAfiliado = true;
+
+                            message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                            user = new User(chatId, message, 'citasSubFlow2')
+                            sendMessage(user)
+                        } else {
+                            message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                            user = new User(chatId, message, 'citasSubFlow1')
+                            sendMessage(user)
                         }
-                        message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                        user = new User(chatId, message, 'citasSubFlow2')
-                        sendMessage(user)
+
                     });
                     users.push(user);
                 } else {
@@ -143,7 +149,7 @@ function subFlow() {
                 }
             }
             console.log(existeAfiliado);
-            
+
 
             if (existeAfiliado) {
                 //Validda la fecha de expedición
