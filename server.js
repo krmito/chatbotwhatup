@@ -112,7 +112,7 @@ function subFlow() {
                     console.log(input);
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
                         console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
-                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse != "") {
+                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
                             console.log("Existe");
                             existeAfiliado = true;
                             message = messagesToSend.newMessage('citasSubFlow2', senderName);
