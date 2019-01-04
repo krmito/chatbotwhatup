@@ -22,6 +22,8 @@ let diasDisponibles: Array<string> = [];
 let senderName: string;
 let chatId: string;
 let fromMe: boolean;
+let existeAfiliado: boolean = false;
+
 let DiasDisponibles = [
     "Martes",
     "Miercoles",
@@ -104,7 +106,6 @@ function subFlow() {
             if (element.state == 'citaInicial') {
                 if (tipoDocumento.find(response => utilities.utilities.isContain(input, response))) {
                     users.splice(index, 1);
-                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = new User(chatId, message, 'citasSubFlow1');
                     sendMessage(user);
@@ -117,14 +118,16 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
                     users.splice(index, 1);
                     documentNumber = parseInt(input);
-                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = new User(chatId, message, 'citasSubFlow2')
                     sendMessage(user);
                     users.push(user);
+
+                    //Consultar cédula
                     utilities.utilities.functionWithCallBack(subFlow(), 1000).then(res => {
-                        consultarServicio("CC", Number(input));
+                        existeAfiliado = consultarServicio("CC", Number(input));
                     });
+
                 } else {
                     console.log('HEY BRO!!!!!');
                     users.splice(index, 1);
@@ -135,66 +138,76 @@ function subFlow() {
                 }
             }
 
-            //Validda la fecha de expedición
-            if (element.state == 'citasSubFlow2') {
-                if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                    users.splice(index, 1);
-                    documentDate = input;
-                    message = messagesToSend.newMessage('eligeCita1', senderName);
-                    user = new User(chatId, message, 'eligeCita1');
-
-                    sendMessage(user);
-                    users.push(user);
-                } else {
-                    users.splice(index, 1);
-                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
-                    user = new User(chatId, message, 'citasSubFlow1');
-                    sendMessage(user);
-                    users.push(user);
-                }
-            }
-            if (element.state == 'eligeCita1') {
-
-                for (let indices = 0; indices < DiasDisponibles.length; indices++) {
-                    const element = DiasDisponibles[indices];
-                    console.log(indices);
-                    console.log(DiasDisponibles[indices]);
-                    if (Number(indices - 1) == Number(input)) {
-                        console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
+            if (existeAfiliado) {
+                //Validda la fecha de expedición
+                if (element.state == 'citasSubFlow2') {
+                    if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
-                        user = new User(chatId, message, 'eligeCita2');
+                        documentDate = input;
+                        message = messagesToSend.newMessage('eligeCita1', senderName);
+                        user = new User(chatId, message, 'eligeCita1');
+
+                        sendMessage(user);
+                        users.push(user);
+                    } else {
+                        users.splice(index, 1);
+                        message = messagesToSend.newMessage('docInvalidoFecha', senderName);
+                        user = new User(chatId, message, 'citasSubFlow1');
                         sendMessage(user);
                         users.push(user);
                     }
                 }
-            }
+                if (element.state == 'eligeCita1') {
 
-            if (element.state == 'eligeCita2') {
-                horasDisponibles.forEach((element, indice2) => {
+                    for (let indices = 0; indices < DiasDisponibles.length; indices++) {
+                        const element = DiasDisponibles[indices];
+                        console.log(indices);
+                        console.log(DiasDisponibles[indices]);
+                        if (Number(indices - 1) == Number(input)) {
+                            console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
+                            users.splice(index, 1);
+                            message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
+                            user = new User(chatId, message, 'eligeCita2');
+                            sendMessage(user);
+                            users.push(user);
+                        }
+                    }
+                }
 
-                    if (Number(indice2 - 1) == Number(input)) {
-                        users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
-                        user = new User(chatId, message, 'eligeCita3');
+                if (element.state == 'eligeCita2') {
+                    horasDisponibles.forEach((element, indice2) => {
+
+                        if (Number(indice2 - 1) == Number(input)) {
+                            users.splice(index, 1);
+                            message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
+                            user = new User(chatId, message, 'eligeCita3');
+                            sendMessage(user);
+                            users.push(user);
+                        }
+
+                    });
+
+                }
+                if (element.state == 'eligeCita3') {
+                    if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
+                        message = messagesToSend.newMessage('eligeCita5', senderName);
+                        user = new User(chatId, message, 'eligeCita5');
+                        sendMessage(user);
+                        users.push(user);
+                    } else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
+                        message = messagesToSend.newMessage('eligeCita1', senderName);
+                        user = new User(chatId, message, 'eligeCita1');
                         sendMessage(user);
                         users.push(user);
                     }
-
-                });
-            }
-            if (element.state == 'eligeCita3') {
-                if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
-                    message = messagesToSend.newMessage('eligeCita5', senderName);
-                    user = new User(chatId, message, 'eligeCita5');
-                    sendMessage(user);
-                    users.push(user);
-                } else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
-                    message = messagesToSend.newMessage('eligeCita1', senderName);
-                    user = new User(chatId, message, 'eligeCita1');
-                    sendMessage(user);
-                    users.push(user);
                 }
+            } else {
+                console.log("Número de documento no está afiliado");
+                users.splice(index, 1);
+                message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                user = new User(chatId, message, 'citasSubFlow1');
+                sendMessage(user);
+                users.push(user);
             }
         }
     });
@@ -215,7 +228,7 @@ let server = app.listen(process.env.PORT, function () {
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
 
-function consultarServicio(tipo: string, cedula: number) {
+function consultarServicio(tipo: string, cedula: number): boolean {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
 
@@ -223,9 +236,11 @@ function consultarServicio(tipo: string, cedula: number) {
     let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
 
     console.log("BODY__>__>__>__>", data.body.responseMessageOut.body.response.consultaAfiliadoResponse);
-    if (datos.responseMessageOut.body) {
+    if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
+        return true;
     } else {
         console.log("No existe");
+        return false;
     }
 }
