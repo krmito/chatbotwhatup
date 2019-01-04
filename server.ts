@@ -169,16 +169,17 @@ function subFlow() {
                     const element = DiasDisponibles[indices];
                     console.log(indices);
                     console.log(DiasDisponibles[indices]);
-                    if (Number(indices - 1) == Number(input)) {
+                    if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
                         users.splice(index, 1);
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices]);
                         user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
                     }
                 }
             }
+            
             console.log("VALIDACIÓN2: " + existeAfiliado + "    ----     "  + element.state);
             if (element.state == 'eligeCita2' && existeAfiliado) {
                 horasDisponibles.forEach((element, indice2) => {
