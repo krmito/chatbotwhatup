@@ -1,6 +1,5 @@
 export class utilities {
 
-
     constructor() { }
 
     static functionWithCallBack(functionX: any, timeout: number) {

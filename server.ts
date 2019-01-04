@@ -119,15 +119,13 @@ function subFlow() {
                     documentNumber = parseInt(input);
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = new User(chatId, message, 'citasSubFlow2')
-                    sendMessage(user);
-                    users.push(user);
-
+                    
                     //Consultar cédula
                     console.log(input);
-                    utilities.utilities.functionWithCallBack(subFlow(), 2000).then(res => {
+                    utilities.utilities.functionWithCallBack(sendMessage(user), 2000).then(res => {
                         consultarServicio("CC", Number(input));
                     });
-
+                    users.push(user);
                 } else {
                     console.log('HEY BRO!!!!!');
                     users.splice(index, 1);
