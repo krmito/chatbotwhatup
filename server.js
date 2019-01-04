@@ -191,13 +191,6 @@ function subFlow() {
                     }
                 }
             }
-            else {
-                users.splice(index, 1);
-                message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                user = new User_1.User(chatId, message, 'citasSubFlow1');
-                sendMessage(user);
-                users.push(user);
-            }
         }
     });
 }

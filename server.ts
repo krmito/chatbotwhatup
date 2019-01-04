@@ -209,12 +209,6 @@ function subFlow() {
                         users.push(user);
                     }
                 }
-            } else {
-                users.splice(index, 1);
-                message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                user = new User(chatId, message, 'citasSubFlow1');
-                sendMessage(user);
-                users.push(user);
             }
         }
     });
