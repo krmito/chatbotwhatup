@@ -212,13 +212,13 @@ function consultarServicio(tipo, cedula) {
         
     }) */
     console.log("BODY__>__>__>__>", datos);
-    return datos;
-    //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
-    /* if (datos.responseMessageOut.body != undefined) {
+    if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
         return true;
-    } else {
+    }
+    else {
         console.log("No existe");
         return false;
-    } */
+    }
+    //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
 }

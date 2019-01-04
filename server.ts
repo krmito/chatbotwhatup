@@ -121,8 +121,8 @@ function subFlow() {
                     //Consultar cédula
                     console.log(input);
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
-                        console.log("resssss",res);
-                        
+                        console.log("resssss", res);
+
                         message = messagesToSend.newMessage('citasSubFlow2', senderName);
                         user = new User(chatId, message, 'citasSubFlow2')
                         sendMessage(user)
@@ -221,11 +221,11 @@ let server = app.listen(process.env.PORT, function () {
 
 function consultarServicio(tipo: string, cedula: number) {
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-  //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
+    //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
 
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
-     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function(x:any){
-        console.log('YOLO--------->',x);
+    servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x: any) {
+        console.log('YOLO--------->', x);
         datos = x;
     });
     /* utilities.utilities.functionWithCallBack(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula),1000).then(res=>{
@@ -234,13 +234,13 @@ function consultarServicio(tipo: string, cedula: number) {
     }) */
 
     console.log("BODY__>__>__>__>", datos);
-    return datos;
-    //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
-    /* if (datos.responseMessageOut.body != undefined) {
+    if (datos.responseMessageOut.body != undefined) {
         console.log("Existe");
         return true;
     } else {
         console.log("No existe");
         return false;
-    } */
+    }
+    //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
+
 }
