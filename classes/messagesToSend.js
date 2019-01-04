@@ -1,6 +1,6 @@
 "use strict";
 var messagesToSend = {
-    newMessage: function (state, userName, dia, hora) {
+    newMessage: function (state, userName, dia, hora, objecto) {
         var mensaje = '';
         switch (state) {
             case 'saludoInicial':
@@ -22,7 +22,7 @@ var messagesToSend = {
                 mensaje = "Por favor " + userName + " digite una fecha de expedicion v\u00E1lida \n*(1990-12-20)*";
                 break;
             case 'citasSubFlow2':
-                mensaje = "Por favor " + userName + " digite la fecha de expedicion de su documento (1990-12-20)";
+                mensaje = " Tus datos son: \nTu calidad de afiliado " + objecto.calidad + "\nTu fecha de afiliacion " + objecto.fecha + "\nTu tipo de afilaici\u00F3n " + objecto.tipo + "\nPor favor " + userName + " digite la fecha de expedicion de su documento (1990-12-20)";
                 break;
             case 'citasSubFlow3':
                 mensaje = userName + " su numero de documento no se encuentra registrado, por favor intentalo de nuevo";

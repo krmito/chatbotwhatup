@@ -122,13 +122,20 @@ function subFlow() {
                     //Consultar cédula
                     console.log(input);
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
+                        let afiliado = JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado;
 
-                        console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
-                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado!=undefined) {
+                        console.log("BOOLENAO: ", afiliado);
+                        if (afiliado != undefined) {
+
+                            let calidadAfiliado = afiliado.calidadAfiliado;
+                            let fechaAfiliacion = afiliado.fechaAfiliacionSistema;
+                            let tipoAfiliado = afiliado.tipoAfiliado;
+                            let object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
+
                             console.log("Existe");
                             existeAfiliado = true;
 
-                            message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                            message = messagesToSend.newMessage('citasSubFlow2', senderName, null, null, object);
                             user = new User(chatId, message, 'citasSubFlow2')
                             sendMessage(user)
                         } else {

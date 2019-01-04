@@ -1,6 +1,6 @@
 
 let messagesToSend = {
-  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string) {
+  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string, objecto?: any) {
     let mensaje = '';
 
     switch (state) {
@@ -35,7 +35,11 @@ let messagesToSend = {
 *(1990-12-20)*`;
         break;
       case 'citasSubFlow2':
-        mensaje = `Por favor ${userName} digite la fecha de expedicion de su documento (1990-12-20)`;
+        mensaje = ` Tus datos son: 
+Tu calidad de afiliado ${objecto.calidad}
+Tu fecha de afiliacion ${objecto.fecha}
+Tu tipo de afilaición ${objecto.tipo}
+Por favor ${userName} digite la fecha de expedicion de su documento (1990-12-20)`;
         break;
       case 'citasSubFlow3':
         mensaje = `${userName} su numero de documento no se encuentra registrado, por favor intentalo de nuevo`;
