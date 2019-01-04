@@ -59,8 +59,6 @@ export class servicioAfiliadoEPS {
         else {
           console.log(error);
         }
-
-
       });
   }
 

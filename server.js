@@ -207,12 +207,8 @@ function consultarServicio(tipo, cedula) {
         console.log('YOLO--------->', x);
         datos = x;
     });
-    /* utilities.utilities.functionWithCallBack(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula),1000).then(res=>{
-        console.log('res-> ',res);
-        
-    }) */
     console.log("BODY__>__>__>__>", datos);
-    if (datos.responseMessageOut.body != undefined) {
+    if (datos != undefined) {
         console.log("Existe");
         return true;
     }
@@ -220,5 +216,4 @@ function consultarServicio(tipo, cedula) {
         console.log("No existe");
         return false;
     }
-    //console.log("BODY__>__>__>__>", datos.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
 }
