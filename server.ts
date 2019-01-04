@@ -136,13 +136,14 @@ function subFlow() {
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
                     users.splice(index, 1);
                     documentDate = input;
+                    console.log("Número de documento: " + documentNumber);
 
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
-                        let afiliado = JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado;
 
-                        console.log("BOOLENAO: ", afiliado);
-                        if (afiliado != undefined) {
 
+                        console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
+                        if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
+                            let afiliado = JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado;
                             let calidadAfiliado = afiliado.calidadAfiliado;
                             let fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             let tipoAfiliado = afiliado.tipoAfiliado;
