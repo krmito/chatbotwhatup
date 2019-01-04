@@ -169,56 +169,51 @@ function subFlow() {
                 }
             }
 
-
-            if (existeAfiliado) {
-
-                if (element.state == 'eligeCita1') {
-
-                    for (let indices = 0; indices < DiasDisponibles.length; indices++) {
-                        const element = DiasDisponibles[indices];
-                        console.log(indices);
-                        console.log(DiasDisponibles[indices]);
-                        if (Number(indices - 1) == Number(input)) {
-                            console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                            users.splice(index, 1);
-                            message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
-                            user = new User(chatId, message, 'eligeCita2');
-                            sendMessage(user);
-                            users.push(user);
-                        }
-                    }
-                }
-
-
-                if (element.state == 'eligeCita2') {
-                    horasDisponibles.forEach((element, indice2) => {
-
-                        if (Number(indice2 - 1) == Number(input)) {
-                            users.splice(index, 1);
-                            message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
-                            user = new User(chatId, message, 'eligeCita3');
-                            sendMessage(user);
-                            users.push(user);
-                        }
-
-                    });
-
-                }
-
-                if (element.state == 'eligeCita3') {
-                    if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
-                        message = messagesToSend.newMessage('eligeCita5', senderName);
-                        user = new User(chatId, message, 'eligeCita5');
-                        sendMessage(user);
-                        users.push(user);
-                    } else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
-                        message = messagesToSend.newMessage('eligeCita1', senderName);
-                        user = new User(chatId, message, 'eligeCita1');
+            if (element.state == 'eligeCita1' && existeAfiliado) {
+                for (let indices = 0; indices < DiasDisponibles.length; indices++) {
+                    const element = DiasDisponibles[indices];
+                    console.log(indices);
+                    console.log(DiasDisponibles[indices]);
+                    if (Number(indices - 1) == Number(input)) {
+                        console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
+                        users.splice(index, 1);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices - 1]);
+                        user = new User(chatId, message, 'eligeCita2');
                         sendMessage(user);
                         users.push(user);
                     }
                 }
             }
+
+            if (element.state == 'eligeCita2' && existeAfiliado) {
+                horasDisponibles.forEach((element, indice2) => {
+
+                    if (Number(indice2 - 1) == Number(input)) {
+                        users.splice(index, 1);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
+                        user = new User(chatId, message, 'eligeCita3');
+                        sendMessage(user);
+                        users.push(user);
+                    }
+
+                });
+
+            }
+
+            if (element.state == 'eligeCita3' && existeAfiliado) {
+                if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
+                    message = messagesToSend.newMessage('eligeCita5', senderName);
+                    user = new User(chatId, message, 'eligeCita5');
+                    sendMessage(user);
+                    users.push(user);
+                } else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
+                    message = messagesToSend.newMessage('eligeCita1', senderName);
+                    user = new User(chatId, message, 'eligeCita1');
+                    sendMessage(user);
+                    users.push(user);
+                }
+            }
+
         }
     });
 }

@@ -28,7 +28,7 @@ var messagesToSend = {
                 mensaje = userName + " su numero de documento no se encuentra registrado, por favor intentalo de nuevo";
                 break;
             case 'eligeCita1':
-                mensaje = " Tus datos son: \nTu calidad de afiliado " + objecto.calidad + "\nTu fecha de afiliacion " + objecto.fecha + "\nTu tipo de afilaici\u00F3n " + objecto.tipo + "\n        " + userName + " se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles\n*1. Martes* \n*2. Miercoles* \n*3. Jueves* \n*4. Viernes* \n*5.Cancelar* \n";
+                mensaje = " Tus datos son: \nTu calidad de afiliado " + objecto.calidad + "\nTu fecha de afiliacion " + objecto.fecha + "\nTu tipo de afilaici\u00F3n " + objecto.tipo + "\n        " + userName + " se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles\n        *1. Martes* \n        *2. Miercoles* \n        *3. Jueves* \n        *4. Viernes* \n        *5.Cancelar* \n";
                 break;
             case 'eligeCita2':
                 mensaje = userName + " estas son las horas en que tenemos citas disponibles para el " + dia + "\n*1. 8:00* \n*2. 9:00* \n*3. 3:30* \n*4. 4:20* \n*5.Cancelar* \n";

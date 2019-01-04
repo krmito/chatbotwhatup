@@ -46,11 +46,11 @@ Tu calidad de afiliado ${objecto.calidad}
 Tu fecha de afiliacion ${objecto.fecha}
 Tu tipo de afilaición ${objecto.tipo}
         ${userName} se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles
-*1. Martes* 
-*2. Miercoles* 
-*3. Jueves* 
-*4. Viernes* 
-*5.Cancelar* 
+        *1. Martes* 
+        *2. Miercoles* 
+        *3. Jueves* 
+        *4. Viernes* 
+        *5.Cancelar* 
 `;
         break;
       case 'eligeCita2':
