@@ -8,7 +8,7 @@ export class servicioAfiliadoEPS {
   static response: any;
   constructor() { }
 
-  static armaObjetos(tipo: string, cedula: number, callback:any): any {
+  static armaObjetos(tipo: string, cedula: number, callback: any): any {
 
     console.log("Tipo: ", tipo, " cédula: ", cedula);
 
@@ -54,15 +54,14 @@ export class servicioAfiliadoEPS {
         console.log('THIS IS THE BODY: ', body);
 
         if (!error && response.statusCode == 200) {
-          callback(body);
-      }
-      else{
-        console.log(error);
-      }
-      
+          this.armaObjetos(tipo, cedula, callback(body));
+        } else {
+          console.log(error);
+        }
+
 
       });
-      return callback;
+    return callback;
 
   }
 
