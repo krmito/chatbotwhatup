@@ -55,7 +55,7 @@ var servicioAfiliadoEPS = /** @class */ (function () {
                 _this.tipoDocumento = '';
             }
         });
-        return this.response;
+        return this.fechaExpedicion;
     };
     servicioAfiliadoEPS.servicioQuemado = function (tipo, cedula) {
         var res;
