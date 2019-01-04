@@ -48,7 +48,7 @@ app.post('/my_webhook_url2', function (req, res) {
 });
 function checkMessage() {
     citaInicial2 = ["general", "odontologia"];
-    citaInicial1 = ["cita", "citas"];
+    citaInicial1 = ["cita", "citas", "Citas"];
     saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
     tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
     DiasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
@@ -70,7 +70,7 @@ function checkMessage() {
                 user.body = message;
                 sendMessage(user);
             }
-            else if (citaInicial1.find(function (valueCita) { return utilities.isContain(input, valueCita); })) {
+            else if (citaInicial1.find(function (valueCita) { return utilities.utilities.isContain(input, valueCita); })) {
                 console.log('hey mans ');
                 message = messagesToSend.newMessage('citaInicial1', senderName);
                 user = users.find(function (userValue) { return userValue.chatId == chatId; });
@@ -100,7 +100,7 @@ function subFlow() {
         if (!fromMe) {
             //Ingresa l tipo de documento
             if (user.state == 'citaInicial1') {
-                if (citaInicial2.find(function (response) { return utilities.isContain(input, response); })) {
+                if (citaInicial2.find(function (response) { return utilities.utilities.isContain(input, response); })) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citaInicial2', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
@@ -110,7 +110,7 @@ function subFlow() {
                 }
             }
             else if (user.state == 'citaInicial2') {
-                if (tipoDocumento.find(function (response) { return utilities.isContain(input, response); })) {
+                if (tipoDocumento.find(function (response) { return utilities.utilities.isContain(input, response); })) {
                     console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
@@ -315,10 +315,10 @@ function availableDates() {
     /// ESTO ES EN CASO DE QUE EL HORARIO DE ATENFCIÓN SEA DE LUNES A VIERNES, EN CAOS DE QUE SE VA ATENDER FINES DE SEMANA HAY QUE HACER ALGO ADICIONAL
     for (var i = diasDisponibles; i <= 5; i++) {
         if (i == diasDisponibles) {
-            arregloDias.push({ "text": 'Hoy ' + utilities.diaSemana(dia, mesString, anio) + ' ' + dia + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
+            arregloDias.push({ "text": 'Hoy ' + utilities.utilities.diaSemana(dia, mesString, anio) + ' ' + dia + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
         }
         else if (i > diasDisponibles) {
-            arregloDias.push({ "text": utilities.diaSemana(dia + contador, mesString, anio) + ' ' + (dia + contador) + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
+            arregloDias.push({ "text": utilities.utilities.diaSemana(dia + contador, mesString, anio) + ' ' + (dia + contador) + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
         }
         contador++;
     }
