@@ -22,13 +22,13 @@ var messagesToSend = {
                 mensaje = "Por favor " + userName + " digite una fecha de expedicion v\u00E1lida \n*(1990-12-20)*";
                 break;
             case 'citasSubFlow2':
-                mensaje = " Tus datos son: \nTu calidad de afiliado " + objecto.calidad + "\nTu fecha de afiliacion " + objecto.fecha + "\nTu tipo de afilaici\u00F3n " + objecto.tipo + "\nPor favor " + userName + " digite la fecha de expedicion de su documento (1990-12-20)";
+                mensaje = "Por favor " + userName + " digite la fecha de expedicion de su documento (1990-12-20)";
                 break;
             case 'citasSubFlow3':
                 mensaje = userName + " su numero de documento no se encuentra registrado, por favor intentalo de nuevo";
                 break;
             case 'eligeCita1':
-                mensaje = userName + " se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles\n*1. Martes* \n*2. Miercoles* \n*3. Jueves* \n*4. Viernes* \n*5.Cancelar* \n";
+                mensaje = " Tus datos son: \nTu calidad de afiliado " + objecto.calidad + "\nTu fecha de afiliacion " + objecto.fecha + "\nTu tipo de afilaici\u00F3n " + objecto.tipo + "\n        " + userName + " se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles\n*1. Martes* \n*2. Miercoles* \n*3. Jueves* \n*4. Viernes* \n*5.Cancelar* \n";
                 break;
             case 'eligeCita2':
                 mensaje = userName + " estas son las horas en que tenemos citas disponibles para el " + dia + "\n*1. 8:00* \n*2. 9:00* \n*3. 3:30* \n*4. 4:20* \n*5.Cancelar* \n";

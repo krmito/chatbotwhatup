@@ -35,17 +35,17 @@ let messagesToSend = {
 *(1990-12-20)*`;
         break;
       case 'citasSubFlow2':
-        mensaje = ` Tus datos son: 
-Tu calidad de afiliado ${objecto.calidad}
-Tu fecha de afiliacion ${objecto.fecha}
-Tu tipo de afilaición ${objecto.tipo}
-Por favor ${userName} digite la fecha de expedicion de su documento (1990-12-20)`;
+        mensaje = `Por favor ${userName} digite la fecha de expedicion de su documento (1990-12-20)`;
         break;
       case 'citasSubFlow3':
         mensaje = `${userName} su numero de documento no se encuentra registrado, por favor intentalo de nuevo`;
         break;
       case 'eligeCita1':
-        mensaje = `${userName} se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles
+        mensaje = ` Tus datos son: 
+Tu calidad de afiliado ${objecto.calidad}
+Tu fecha de afiliacion ${objecto.fecha}
+Tu tipo de afilaición ${objecto.tipo}
+        ${userName} se a verificado su documento exitosamente, estos son los dias en que tenemos citas disponibles
 *1. Martes* 
 *2. Miercoles* 
 *3. Jueves* 
