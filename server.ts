@@ -201,7 +201,7 @@ function subFlow() {
                         users.push(user);
                     }
                 }
-            } else {
+            } else if (!existeAfiliado && element.state == 'citasSubFlow1') {
                 console.log("Número de documento no está afiliado");
                 users.splice(index, 1);
                 message = messagesToSend.newMessage('citasSubFlow1', senderName);
