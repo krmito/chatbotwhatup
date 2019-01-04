@@ -90,6 +90,7 @@ function checkMessega() {
     }
 }
 function subFlow() {
+    var valor;
     users.forEach(function (element, index) {
         console.log("Estado: ", element.state);
         if (!fromMe) {
@@ -109,13 +110,12 @@ function subFlow() {
                     documentNumber = parseInt(input);
                     //Consultar cédula
                     console.log(input);
-                    // utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
-                    var valor = consultarServicio("CC", documentNumber);
-                    console.log("BOOLENAO: ", valor);
-                    message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                    user = new User_1.User(chatId, message, 'citasSubFlow2');
-                    sendMessage(user);
-                    //});
+                    utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
+                        console.log("BOOLENAO: ", res);
+                        message = messagesToSend.newMessage('citasSubFlow2', senderName);
+                        user = new User_1.User(chatId, message, 'citasSubFlow2');
+                        sendMessage(user);
+                    });
                     users.push(user);
                 }
                 else {
@@ -201,17 +201,16 @@ var server = app.listen(process.env.PORT, function () {
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
 function consultarServicio(tipo, cedula) {
-    var respuesta = false;
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x) {
         console.log('YOLO--------->', x);
         datos = x;
-        console.log("BODY__>__>__>__>", datos);
-        if (datos != undefined) {
-            console.log("Existe");
-            return respuesta = true;
-        }
     });
+    console.log("BODY__>__>__>__>", datos);
+    if (datos != undefined) {
+        console.log("Existe");
+        return true;
+    }
 }

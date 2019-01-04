@@ -5,7 +5,9 @@ var utilities = /** @class */ (function () {
     }
     utilities.functionWithCallBack = function (functionX, timeout) {
         var promise = new Promise(function (resolve, reject) {
+            console.log('entro1');
             setTimeout(function () {
+                console.log('entro3');
                 functionX;
                 resolve();
             }, timeout);
