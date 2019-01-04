@@ -3,8 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var servicioAfiliadoEPS = /** @class */ (function () {
     function servicioAfiliadoEPS() {
     }
-    servicioAfiliadoEPS.armaObjetos = function (tipo, cedula) {
-        var _this = this;
+    servicioAfiliadoEPS.armaObjetos = function (tipo, cedula, callback) {
         console.log("Tipo: ", tipo, " cédula: ", cedula);
         this.cuerpo = {
             "requestMessageOut": {
@@ -39,27 +38,20 @@ var servicioAfiliadoEPS = /** @class */ (function () {
             }
         };
         console.log("Cuerpo: " + JSON.stringify(this.cuerpo));
-        var x;
         this.request.post({
             "headers": { "content-type": "application/json" },
             "url": this.servicio,
             "body": JSON.stringify(this.cuerpo)
         }, function (error, response, body) {
             console.log('THIS IS THE BODY: ', body);
-            _this.response = JSON.parse(response.body);
-            //console.log("Response_>_>" + JSON.stringify(this.response));
-            if (_this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
-                _this.tipoDocumento = _this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
-                _this.fechaExpedicion = _this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
-                console.log("CC: ", _this.tipoDocumento, " Fecha expedición: ", _this.fechaExpedicion);
+            if (!error && response.statusCode == 200) {
+                callback(body);
             }
             else {
-                _this.tipoDocumento = '';
+                console.log(error);
             }
-            console.log("RESPONSE_>_>>_>>>>", _this.response);
-            x = _this.response;
         });
-        return x;
+        return callback;
     };
     servicioAfiliadoEPS.servicioQuemado = function (tipo, cedula) {
         var res;

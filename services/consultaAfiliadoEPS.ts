@@ -8,7 +8,7 @@ export class servicioAfiliadoEPS {
   static response: any;
   constructor() { }
 
-  static armaObjetos(tipo: string, cedula: number): any {
+  static armaObjetos(tipo: string, cedula: number, callback:any): any {
 
     console.log("Tipo: ", tipo, " cédula: ", cedula);
 
@@ -45,7 +45,6 @@ export class servicioAfiliadoEPS {
       }
     }
     console.log("Cuerpo: " + JSON.stringify(this.cuerpo));
-    let x;
     this.request.post(
       {
         "headers": { "content-type": "application/json" },
@@ -54,23 +53,16 @@ export class servicioAfiliadoEPS {
       }, (error: any, response: any, body: any) => {
         console.log('THIS IS THE BODY: ', body);
 
-        this.response = JSON.parse(response.body);
-        //console.log("Response_>_>" + JSON.stringify(this.response));
-
-        if (this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
-          this.tipoDocumento = this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.idTiid;
-          this.fechaExpedicion = this.response.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado.fechaAfiliacionSistema;
-
-          console.log("CC: ", this.tipoDocumento, " Fecha expedición: ", this.fechaExpedicion);
-
-        } else {
-          this.tipoDocumento = '';
-        }
-        console.log("RESPONSE_>_>>_>>>>", this.response);
-        x = this.response;
+        if (!error && response.statusCode == 200) {
+          callback(body);
+      }
+      else{
+        console.log(error);
+      }
+      
 
       });
-    return x;
+      return callback;
 
   }
 
