@@ -222,6 +222,10 @@ function consultarServicio(tipo: string, cedula: number) {
 
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     let datos = servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula);
+    utilities.utilities.functionWithCallBack(servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula),1000).then(res=>{
+        console.log('res-> ',res);
+        
+    })
 
     console.log("BODY__>__>__>__>", datos);
     console.log("BODY__>__>__>__>", datos.body.responseMessageOut.body.response.consultaAfiliadoResponse.afiliado);
