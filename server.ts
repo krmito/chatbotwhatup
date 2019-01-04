@@ -3,11 +3,12 @@ import bodyParser = require('body-parser');
 import request = require('request');
 import { User } from "./classes/User";
 let messagesToSend = require("./classes/messagesToSend");
-import utilities = require("./classes/utilities");
+let utilities = require("./classes/utilities");
 import servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
+/* let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS"); */
 
 let app = express();
-let url: string = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
+let url: string = 'https://eu11.chat-api.com/instance20204/sendMessage?token=linoijx5h4glyl4b';
 let users: Array<any> = [];
 let user: User;
 let data: any;
@@ -15,46 +16,48 @@ let documentNumber: number;
 let documentDate: string;
 let message: string;
 let saludosInicial: Array<string> = [];
-let citaInicial: Array<string> = [];
+let citaInicial1: Array<string> = [];
+let citaInicial2: Array<string> = [];
 let tipoDocumento: Array<string> = [];
 let input: string = "";
 let diasDisponibles: Array<string> = [];
 let senderName: string;
 let chatId: string;
 let fromMe: boolean;
-let existeAfiliado: boolean;
+let elementUser: User;
+let indexUser: number;
+let fechaActual = new Date();
+let dia = fechaActual.getDate();
+let mes = fechaActual.getMonth();
+let anio = fechaActual.getFullYear();
+let mesString: string;
 let datos: any;
-
-let DiasDisponibles = [
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes",
-];
-
-let horasDisponibles = [
-    "8:00",
-    "9:00",
-    "3:30",
-    "4:20",
-    "cancelar"
-]
+let DiasDisponibles: Array<string> = [];
+let horasDisponibles: Array<string> = [];
+let arregloDias: Array<any> = [];;
+let existeAfiliado: boolean;
 app.use(bodyParser.json());
 
-app.post('/my_webhook_url2', (req, res) => {
+app.post('/my_webhook_url', (req, res) => {
     data = req.body; // New messages in the "body" variable
 
     console.log('ELEMENT', data);
-    utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(res => {
-        subFlow();
-        /* consultarServicio(); */
-    });
+    //servicioAfiliadoEPS.armaObjetos("CC", "1107063182")
 
+    checkMessage();
     res.sendStatus(200); //Response does not matter
 });
 
 
-function checkMessega() {
+function checkMessage() {
+
+    citaInicial2 = ["general", "odontologia"];
+    citaInicial1 = ["cita", "citas"];
+    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
+    tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
+    DiasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
+    horasDisponibles = ["8:00", "9:00", "3:30", "4:20", "cancelar"];
+
     data.messages.forEach(element => {
         input = element.body;
         input = input.toLocaleLowerCase().trim();
@@ -63,10 +66,6 @@ function checkMessega() {
         fromMe = element.fromMe
     });
 
-    citaInicial = ["cita", "citas"];
-    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
-    tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
-    //diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
 
     console.log('users', users);
 
@@ -74,19 +73,20 @@ function checkMessega() {
         if (!fromMe) {
             if (saludosInicial.find(valueSaludo1 => valueSaludo1 == input)) {
                 message = messagesToSend.newMessage('saludoInicial', senderName);
-                user = new User();
-                user = new User(chatId, message, 'saludoInicial')
+                user = users.find(userValue => userValue.chatId == chatId);
+                user.state = 'saludoInicial';
+                user.body = message;
                 sendMessage(user);
-                users.push(user);
 
-            } else if (citaInicial.find(valueCita => utilities.utilities.isContain(input, valueCita))) {
+            } else if (citaInicial1.find(valueCita => utilities.isContain(input, valueCita))) {
                 console.log('hey mans ');
 
-                message = messagesToSend.newMessage('citaInicial', senderName);
-                user = new User();
-                user = new User(chatId, message, 'citaInicial')
+                message = messagesToSend.newMessage('citaInicial1', senderName);
+                user = users.find(userValue => userValue.chatId == chatId);
+                user.state = 'citaInicial1';
+                user.body = message;
                 sendMessage(user);
-                users.push(user);/*  */
+
             }
         }
     } else {
@@ -97,45 +97,76 @@ function checkMessega() {
             users.push(user);
         }
     }
+    subFlow();
 }
 
 function subFlow() {
-    let valor: any;
-    users.forEach((element, index) => {
-        console.log("Estado: ", element.state);
+    /*   users.forEach((element, index) => {
+          elementUser = element;
+          indexUser = index;
+      }); */
+    console.log("Estado: ", user.state, ' ', chatId);
+    if (user = users.find(userValue => userValue.chatId == chatId)) {
+
         if (!fromMe) {
             //Ingresa l tipo de documento
-            if (element.state == 'citaInicial') {
-                if (tipoDocumento.find(response => utilities.utilities.isContain(input, response))) {
-                    users.splice(index, 1);
-                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                    user = new User(chatId, message, 'citasSubFlow1');
+            if (user.state == 'citaInicial1') {
+                if (citaInicial2.find(response => utilities.isContain(input, response))) {
+
+                    console.log('Cant tell man');
+                    message = messagesToSend.newMessage('citaInicial2', senderName);
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'citaInicial2';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
                 }
-            }
+            } else if (user.state == 'citaInicial2') {
+                if (tipoDocumento.find(response => utilities.isContain(input, response))) {
 
-            if (element.state == 'citasSubFlow1') {
+                    console.log('Cant tell man');
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'citasSubFlow1';
+                    user.body = message;
+                    sendMessage(user);
+                }
+            } else if (user.state == 'citasSubFlow1') {
+                console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
-                    users.splice(index, 1);
+
                     documentNumber = parseInt(input);
+                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                    user = new User(chatId, message, 'citasSubFlow2')
-                    sendMessage(user)
-                    users.push(user);
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'citasSubFlow2';
+                    user.body = message;
+                    sendMessage(user);
+                } else {
+                    console.log('HEY BRO!!!!!');
+
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'citasSubFlow1';
+                    user.body = message;
+                    sendMessage(user);
                 }
-            }
-
-
-            //Validda la fecha de expedición
-            if (element.state == 'citasSubFlow2') {
+            } else if (user.state == 'citasSubFlow2') {
+                availableDates();
+                //Validda la fecha de expedición
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                    users.splice(index, 1);
+                    let availableDate: string = '';
+
+                    arregloDias.forEach((element, index) => {
+                        console.log('heyy', index, element);
+                        index = index + 1;
+                        availableDate += index + '.' + element.text + "\n";
+                    });
+
+                    console.log('arregloDias ', arregloDias);
+
+
                     documentDate = input;
 
-                    console.log(documentNumber);
-
-                    //Consultar cédula
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
 
 
@@ -150,79 +181,85 @@ function subFlow() {
                             console.log("Existe");
                             existeAfiliado = true;
 
-                            message = messagesToSend.newMessage('eligeCita1', senderName, null, null, object);
-                            user = new User(chatId, message, 'eligeCita1')
+                            message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate, object);
+                            user = users.find(userValue => userValue.chatId == chatId);
+                            user.state = 'eligeCita1';
+                            user.body = message;
                             sendMessage(user);
-                            users.push(user);
                         } else {
                             existeAfiliado = false;
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                            user = new User(chatId, message, 'citasSubFlow1')
+                            user = users.find(userValue => userValue.chatId == chatId);
+                            user.state = 'citasSubFlow1';
+                            user.body = message;
                             sendMessage(user);
-                            users.push(user);
                         }
                     });
+                    arregloDias = [];
+                } else {
 
+                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'citasSubFlow1';
+                    user.body = message;
+                    sendMessage(user);
                 }
-            }
-            console.log("VALIDACIÓN: " + existeAfiliado);
-            if (element.state == 'eligeCita1' && existeAfiliado) {
+            } else if (user.state == 'eligeCita1') {
+
                 for (let indices = 0; indices < DiasDisponibles.length; indices++) {
-                    const element = DiasDisponibles[indices];
-                    console.log(indices);
-                    console.log(DiasDisponibles[indices]);
+                    console.log('indices', indices);
+                    console.log('DiasDisponibles[indices]', DiasDisponibles[indices]);
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                        users.splice(index, 1);
+
                         message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices]);
-                        user = new User(chatId, message, 'eligeCita2');
+                        user = users.find(userValue => userValue.chatId == chatId);
+                        user.state = 'eligeCita2';
+                        user.body = message;
                         sendMessage(user);
-                        users.push(user);
                     }
                 }
-            }
-
-            console.log("VALIDACIÓN2: " + existeAfiliado + "    ----     " + element.state);
-            if (element.state == 'eligeCita2' && existeAfiliado) {
+            } else if (user.state == 'eligeCita2') {
                 horasDisponibles.forEach((element, indice2) => {
 
                     if (Number(indice2 - 1) == Number(input)) {
-                        users.splice(index, 1);
+
                         message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
-                        user = new User(chatId, message, 'eligeCita3');
+                        user = users.find(userValue => userValue.chatId == chatId);
+                        user.state = 'eligeCita3';
+                        user.body = message;
                         sendMessage(user);
-                        users.push(user);
                     }
 
                 });
+            } else if (user.state == 'eligeCita3') {
 
-            }
-
-            if (element.state == 'eligeCita3' && existeAfiliado) {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('eligeCita5', senderName);
-                    user = new User(chatId, message, 'eligeCita5');
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'eligeCita5';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
                 } else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
                     message = messagesToSend.newMessage('eligeCita1', senderName);
-                    user = new User(chatId, message, 'eligeCita1');
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'eligeCita1';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
                 }
-            }
 
-            if (element.state == 'eligeCita5') {
+            } else if (user.state == 'eligeCita5') {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('saludoInicial', senderName);
-                    user = new User(chatId, message, 'saludoInicial');
+                    user = users.find(userValue => userValue.chatId == chatId);
+                    user.state = 'saludoInicial';
+                    user.body = message;
                     sendMessage(user);
                     users.push(user);
                 }
             }
-
         }
-    });
+    }
 }
 
 function sendMessage(data: any) {
@@ -233,6 +270,34 @@ function sendMessage(data: any) {
     });
 }
 
+function availableDates() {
+    switch (mes) {
+        case 0: { mesString = 'January' } break;
+        case 1: { mesString = 'February' } break;
+        case 2: { mesString = 'March' } break;
+        case 3: { mesString = 'April' } break;
+        case 4: { mesString = 'May' } break;
+        case 5: { mesString = 'June' } break;
+        case 6: { mesString = 'July' } break;
+        case 7: { mesString = 'August' } break;
+        case 8: { mesString = 'September' } break;
+        case 9: { mesString = 'October' } break;
+        case 10: { mesString = 'November' } break;
+        case 11: { mesString = 'December' } break;
+    }
+
+    let diasDisponibles = fechaActual.getDay();
+    let contador = 0;
+    /// ESTO ES EN CASO DE QUE EL HORARIO DE ATENFCIÓN SEA DE LUNES A VIERNES, EN CAOS DE QUE SE VA ATENDER FINES DE SEMANA HAY QUE HACER ALGO ADICIONAL
+    for (let i = diasDisponibles; i <= 5; i++) {
+        if (i == diasDisponibles) {
+            arregloDias.push({ "text": 'Hoy ' + utilities.diaSemana(dia, mesString, anio) + ' ' + dia + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
+        } else if (i > diasDisponibles) {
+            arregloDias.push({ "text": utilities.diaSemana(dia + contador, mesString, anio) + ' ' + (dia + contador) + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
+        }
+        contador++;
+    }
+}
 
 let server = app.listen(process.env.PORT, function () {
     let host = server.address().address;
@@ -240,11 +305,8 @@ let server = app.listen(process.env.PORT, function () {
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
 
-function consultarServicio(tipo: string, cedula: number) {
-    //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-    //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
 
-    //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
+function consultarServicio(tipo: string, cedula: number) {
     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, (x: any) => {
         console.log('YOLO--------->', x);
         datos = x;

@@ -22,7 +22,6 @@ var utilities = /** @class */ (function () {
     utilities.diaSemana = function (dia, mes, anio) {
         var dias = ["dom", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
         var dt = new Date(mes + ' ' + dia + ', ' + anio + ' 12:00:00');
-        //document.getElementById('div1').innerHTML = "Dia de la semana : " + dias[dt.getUTCDay()];    
         console.log('DIA DE LA SEMANA QUE QUIERO OBTENER ' + dias[dt.getUTCDay()]);
         return dias[dt.getUTCDay()];
     };

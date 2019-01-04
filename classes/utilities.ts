@@ -5,9 +5,9 @@ export class utilities {
     static functionWithCallBack(functionX: any, timeout: number) {
         let promise = new Promise((resolve, reject) => {
             console.log('entro1');
-            
+
             setTimeout(() => {
-            console.log('entro3');
+                console.log('entro3');
                 functionX
                 resolve();
             }, timeout);
@@ -21,11 +21,10 @@ export class utilities {
         }
     }
 
-    static diaSemana(dia:number,mes:number,anio:number){
-        var dias=["dom", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
-        var dt = new Date(mes+' '+dia+', '+anio+' 12:00:00');
-        //document.getElementById('div1').innerHTML = "Dia de la semana : " + dias[dt.getUTCDay()];    
-        console.log('DIA DE LA SEMANA QUE QUIERO OBTENER '+dias[dt.getUTCDay()]);
+    static diaSemana(dia: string, mes: string, anio: string) {
+        let dias = ["dom", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
+        let dt = new Date(mes + ' ' + dia + ', ' + anio + ' 12:00:00');
+        console.log('DIA DE LA SEMANA QUE QUIERO OBTENER ' + dias[dt.getUTCDay()]);
         return dias[dt.getUTCDay()];
     }
 }

@@ -7,8 +7,9 @@ var User_1 = require("./classes/User");
 var messagesToSend = require("./classes/messagesToSend");
 var utilities = require("./classes/utilities");
 var servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
+/* let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS"); */
 var app = express();
-var url = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
+var url = 'https://eu11.chat-api.com/instance20204/sendMessage?token=linoijx5h4glyl4b';
 var users = [];
 var user;
 var data;
@@ -16,39 +17,42 @@ var documentNumber;
 var documentDate;
 var message;
 var saludosInicial = [];
-var citaInicial = [];
+var citaInicial1 = [];
+var citaInicial2 = [];
 var tipoDocumento = [];
 var input = "";
 var diasDisponibles = [];
 var senderName;
 var chatId;
 var fromMe;
-var existeAfiliado;
+var elementUser;
+var indexUser;
+var fechaActual = new Date();
+var dia = fechaActual.getDate();
+var mes = fechaActual.getMonth();
+var anio = fechaActual.getFullYear();
+var mesString;
 var datos;
-var DiasDisponibles = [
-    "Martes",
-    "Miercoles",
-    "Jueves",
-    "Viernes",
-];
-var horasDisponibles = [
-    "8:00",
-    "9:00",
-    "3:30",
-    "4:20",
-    "cancelar"
-];
+var DiasDisponibles = [];
+var horasDisponibles = [];
+var arregloDias = [];
+;
+var existeAfiliado;
 app.use(bodyParser.json());
-app.post('/my_webhook_url2', function (req, res) {
+app.post('/my_webhook_url', function (req, res) {
     data = req.body; // New messages in the "body" variable
     console.log('ELEMENT', data);
-    utilities.utilities.functionWithCallBack(checkMessega(), 1000).then(function (res) {
-        subFlow();
-        /* consultarServicio(); */
-    });
+    //servicioAfiliadoEPS.armaObjetos("CC", "1107063182")
+    checkMessage();
     res.sendStatus(200); //Response does not matter
 });
-function checkMessega() {
+function checkMessage() {
+    citaInicial2 = ["general", "odontologia"];
+    citaInicial1 = ["cita", "citas"];
+    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
+    tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
+    DiasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
+    horasDisponibles = ["8:00", "9:00", "3:30", "4:20", "cancelar"];
     data.messages.forEach(function (element) {
         input = element.body;
         input = input.toLocaleLowerCase().trim();
@@ -56,27 +60,23 @@ function checkMessega() {
         chatId = element.chatId;
         fromMe = element.fromMe;
     });
-    citaInicial = ["cita", "citas"];
-    saludosInicial = ["hola", "ola", "buena tarde", "buen dia", "buena noche", "qhubo"];
-    tipoDocumento = ["cédula de ciudadanía", "pasaporte", "tarjeta de identidad", "cancelar"];
-    //diasDisponibles = ["martes", "miercoles", "jueves", "viernes", "cancelar"];
     console.log('users', users);
     if (users.find(function (userValue) { return userValue.chatId == chatId; })) {
         if (!fromMe) {
             if (saludosInicial.find(function (valueSaludo1) { return valueSaludo1 == input; })) {
                 message = messagesToSend.newMessage('saludoInicial', senderName);
-                user = new User_1.User();
-                user = new User_1.User(chatId, message, 'saludoInicial');
+                user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                user.state = 'saludoInicial';
+                user.body = message;
                 sendMessage(user);
-                users.push(user);
             }
-            else if (citaInicial.find(function (valueCita) { return utilities.utilities.isContain(input, valueCita); })) {
+            else if (citaInicial1.find(function (valueCita) { return utilities.isContain(input, valueCita); })) {
                 console.log('hey mans ');
-                message = messagesToSend.newMessage('citaInicial', senderName);
-                user = new User_1.User();
-                user = new User_1.User(chatId, message, 'citaInicial');
+                message = messagesToSend.newMessage('citaInicial1', senderName);
+                user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                user.state = 'citaInicial1';
+                user.body = message;
                 sendMessage(user);
-                users.push(user); /*  */
             }
         }
     }
@@ -88,39 +88,69 @@ function checkMessega() {
             users.push(user);
         }
     }
+    subFlow();
 }
 function subFlow() {
-    var valor;
-    users.forEach(function (element, index) {
-        console.log("Estado: ", element.state);
+    /*   users.forEach((element, index) => {
+          elementUser = element;
+          indexUser = index;
+      }); */
+    console.log("Estado: ", user.state, ' ', chatId);
+    if (user = users.find(function (userValue) { return userValue.chatId == chatId; })) {
         if (!fromMe) {
             //Ingresa l tipo de documento
-            if (element.state == 'citaInicial') {
-                if (tipoDocumento.find(function (response) { return utilities.utilities.isContain(input, response); })) {
-                    users.splice(index, 1);
+            if (user.state == 'citaInicial1') {
+                if (citaInicial2.find(function (response) { return utilities.isContain(input, response); })) {
+                    console.log('Cant tell man');
+                    message = messagesToSend.newMessage('citaInicial2', senderName);
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'citaInicial2';
+                    user.body = message;
+                    sendMessage(user);
+                }
+            }
+            else if (user.state == 'citaInicial2') {
+                if (tipoDocumento.find(function (response) { return utilities.isContain(input, response); })) {
+                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                    user = new User_1.User(chatId, message, 'citasSubFlow1');
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'citasSubFlow1';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
                 }
             }
-            if (element.state == 'citasSubFlow1') {
+            else if (user.state == 'citasSubFlow1') {
+                console.log('this is happening');
                 if (input.match(/([^a-zA-Z])/g)) {
-                    users.splice(index, 1);
                     documentNumber = parseInt(input);
+                    console.log('Cant tell man');
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
-                    user = new User_1.User(chatId, message, 'citasSubFlow2');
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'citasSubFlow2';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
+                }
+                else {
+                    console.log('HEY BRO!!!!!');
+                    message = messagesToSend.newMessage('citasSubFlow1', senderName);
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'citasSubFlow1';
+                    user.body = message;
+                    sendMessage(user);
                 }
             }
-            //Validda la fecha de expedición
-            if (element.state == 'citasSubFlow2') {
+            else if (user.state == 'citasSubFlow2') {
+                availableDates();
+                //Validda la fecha de expedición
                 if (input.match(/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/g)) {
-                    users.splice(index, 1);
+                    var availableDate_1 = '';
+                    arregloDias.forEach(function (element, index) {
+                        console.log('heyy', index, element);
+                        index = index + 1;
+                        availableDate_1 += index + '.' + element.text + "\n";
+                    });
+                    console.log('arregloDias ', arregloDias);
                     documentDate = input;
-                    console.log(documentNumber);
-                    //Consultar cédula
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
                         console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
                         if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
@@ -131,73 +161,84 @@ function subFlow() {
                             var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
                             console.log("Existe");
                             existeAfiliado = true;
-                            message = messagesToSend.newMessage('eligeCita1', senderName, null, null, object);
-                            user = new User_1.User(chatId, message, 'eligeCita1');
+                            message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate_1, object);
+                            user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                            user.state = 'eligeCita1';
+                            user.body = message;
                             sendMessage(user);
-                            users.push(user);
                         }
                         else {
                             existeAfiliado = false;
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
-                            user = new User_1.User(chatId, message, 'citasSubFlow1');
+                            user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                            user.state = 'citasSubFlow1';
+                            user.body = message;
                             sendMessage(user);
-                            users.push(user);
                         }
                     });
+                    arregloDias = [];
+                }
+                else {
+                    message = messagesToSend.newMessage('docInvalidoFecha', senderName);
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'citasSubFlow1';
+                    user.body = message;
+                    sendMessage(user);
                 }
             }
-            console.log("VALIDACIÓN: " + existeAfiliado);
-            if (element.state == 'eligeCita1' && existeAfiliado) {
+            else if (user.state == 'eligeCita1') {
                 for (var indices = 0; indices < DiasDisponibles.length; indices++) {
-                    var element_1 = DiasDisponibles[indices];
-                    console.log(indices);
-                    console.log(DiasDisponibles[indices]);
+                    console.log('indices', indices);
+                    console.log('DiasDisponibles[indices]', DiasDisponibles[indices]);
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                        users.splice(index, 1);
                         message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices]);
-                        user = new User_1.User(chatId, message, 'eligeCita2');
+                        user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                        user.state = 'eligeCita2';
+                        user.body = message;
                         sendMessage(user);
-                        users.push(user);
                     }
                 }
             }
-            console.log("VALIDACIÓN2: " + existeAfiliado + "    ----     " + element.state);
-            if (element.state == 'eligeCita2' && existeAfiliado) {
+            else if (user.state == 'eligeCita2') {
                 horasDisponibles.forEach(function (element, indice2) {
                     if (Number(indice2 - 1) == Number(input)) {
-                        users.splice(index, 1);
                         message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
-                        user = new User_1.User(chatId, message, 'eligeCita3');
+                        user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                        user.state = 'eligeCita3';
+                        user.body = message;
                         sendMessage(user);
-                        users.push(user);
                     }
                 });
             }
-            if (element.state == 'eligeCita3' && existeAfiliado) {
+            else if (user.state == 'eligeCita3') {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('eligeCita5', senderName);
-                    user = new User_1.User(chatId, message, 'eligeCita5');
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'eligeCita5';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
                 }
                 else if (Number(input.match(/([^a-zA-Z])/g)) == 2) {
                     message = messagesToSend.newMessage('eligeCita1', senderName);
-                    user = new User_1.User(chatId, message, 'eligeCita1');
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'eligeCita1';
+                    user.body = message;
                     sendMessage(user);
-                    users.push(user);
                 }
             }
-            if (element.state == 'eligeCita5') {
+            else if (user.state == 'eligeCita5') {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('saludoInicial', senderName);
-                    user = new User_1.User(chatId, message, 'saludoInicial');
+                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
+                    user.state = 'saludoInicial';
+                    user.body = message;
                     sendMessage(user);
                     users.push(user);
                 }
             }
         }
-    });
+    }
 }
 function sendMessage(data) {
     request({
@@ -206,15 +247,88 @@ function sendMessage(data) {
         json: data
     });
 }
+function availableDates() {
+    switch (mes) {
+        case 0:
+            {
+                mesString = 'January';
+            }
+            break;
+        case 1:
+            {
+                mesString = 'February';
+            }
+            break;
+        case 2:
+            {
+                mesString = 'March';
+            }
+            break;
+        case 3:
+            {
+                mesString = 'April';
+            }
+            break;
+        case 4:
+            {
+                mesString = 'May';
+            }
+            break;
+        case 5:
+            {
+                mesString = 'June';
+            }
+            break;
+        case 6:
+            {
+                mesString = 'July';
+            }
+            break;
+        case 7:
+            {
+                mesString = 'August';
+            }
+            break;
+        case 8:
+            {
+                mesString = 'September';
+            }
+            break;
+        case 9:
+            {
+                mesString = 'October';
+            }
+            break;
+        case 10:
+            {
+                mesString = 'November';
+            }
+            break;
+        case 11:
+            {
+                mesString = 'December';
+            }
+            break;
+    }
+    var diasDisponibles = fechaActual.getDay();
+    var contador = 0;
+    /// ESTO ES EN CASO DE QUE EL HORARIO DE ATENFCIÓN SEA DE LUNES A VIERNES, EN CAOS DE QUE SE VA ATENDER FINES DE SEMANA HAY QUE HACER ALGO ADICIONAL
+    for (var i = diasDisponibles; i <= 5; i++) {
+        if (i == diasDisponibles) {
+            arregloDias.push({ "text": 'Hoy ' + utilities.diaSemana(dia, mesString, anio) + ' ' + dia + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
+        }
+        else if (i > diasDisponibles) {
+            arregloDias.push({ "text": utilities.diaSemana(dia + contador, mesString, anio) + ' ' + (dia + contador) + '/' + (fechaActual.getMonth() + 1) + '/' + anio });
+        }
+        contador++;
+    }
+}
 var server = app.listen(process.env.PORT, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
 function consultarServicio(tipo, cedula) {
-    //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
-    //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
-    //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x) {
         console.log('YOLO--------->', x);
         datos = x;

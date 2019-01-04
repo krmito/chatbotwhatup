@@ -1,6 +1,6 @@
 
 let messagesToSend = {
-  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string, objecto?: any) {
+  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string, x?: string, objecto?: any) {
     let mensaje = '';
 
     switch (state) {

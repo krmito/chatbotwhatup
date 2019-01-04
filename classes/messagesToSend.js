@@ -1,6 +1,6 @@
 "use strict";
 var messagesToSend = {
-    newMessage: function (state, userName, dia, hora, objecto) {
+    newMessage: function (state, userName, dia, hora, x, objecto) {
         var mensaje = '';
         switch (state) {
             case 'saludoInicial':
