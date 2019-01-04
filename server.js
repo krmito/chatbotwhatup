@@ -114,7 +114,7 @@ function subFlow() {
                         console.log("BOOLENAO: ", datos);
                         if (datos != undefined) {
                             console.log("Existe");
-                            return existeAfiliado = true;
+                            existeAfiliado = true;
                         }
                         message = messagesToSend.newMessage('citasSubFlow2', senderName);
                         user = new User_1.User(chatId, message, 'citasSubFlow2');
