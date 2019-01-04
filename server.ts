@@ -227,15 +227,16 @@ function consultarServicio(tipo: string, cedula: number) {
     servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula, function (x: any) {
         console.log('YOLO--------->', x);
         datos = x;
+
+        console.log("BODY__>__>__>__>", datos);
+        if (datos != undefined) {
+            console.log("Existe");
+            return true;
+        } else {
+            console.log("No existe");
+            return false;
+        }
     });
 
-    console.log("BODY__>__>__>__>", datos);
-    if (datos != undefined) {
-        console.log("Existe");
-        return true;
-    } else {
-        console.log("No existe");
-        return false;
-    }
 
 }
