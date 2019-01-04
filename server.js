@@ -201,6 +201,7 @@ var server = app.listen(process.env.PORT, function () {
     console.log("El servidor se encuentra en el puerto " + port + " y el host es " + host);
 });
 function consultarServicio(tipo, cedula) {
+    var respuesta = false;
     //console.log("SERVER_>_>_>_>_>", JSON.stringify(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182")));
     //  console.log("SERVER_>_>_>_>_>", servicioAfiliadoEPS.servicioAfiliadoEPS.armaObjetos(tipo, cedula));
     //let data = JSON.parse(servicioAfiliadoEPS.servicioAfiliadoEPS.servicioQuemado("CC", "1107063182"));
@@ -210,11 +211,7 @@ function consultarServicio(tipo, cedula) {
         console.log("BODY__>__>__>__>", datos);
         if (datos != undefined) {
             console.log("Existe");
-            return true;
-        }
-        else {
-            console.log("No existe");
-            return false;
+            return respuesta = true;
         }
     });
 }
