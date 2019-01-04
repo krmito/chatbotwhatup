@@ -152,15 +152,17 @@ function subFlow() {
 
                             message = messagesToSend.newMessage('eligeCita1', senderName, null, null, object);
                             user = new User(chatId, message, 'eligeCita1')
-                            sendMessage(user)
+                            sendMessage(user);
+                            users.push(user);
                         } else {
                             existeAfiliado = false;
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
                             user = new User(chatId, message, 'citasSubFlow1')
-                            sendMessage(user)
+                            sendMessage(user);
+                            users.push(user);
                         }
                     });
-                    users.push(user);
+
                 }
             }
             console.log("VALIDACIÓN: " + existeAfiliado);
@@ -179,8 +181,8 @@ function subFlow() {
                     }
                 }
             }
-            
-            console.log("VALIDACIÓN2: " + existeAfiliado + "    ----     "  + element.state);
+
+            console.log("VALIDACIÓN2: " + existeAfiliado + "    ----     " + element.state);
             if (element.state == 'eligeCita2' && existeAfiliado) {
                 horasDisponibles.forEach((element, indice2) => {
 

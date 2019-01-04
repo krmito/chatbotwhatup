@@ -134,15 +134,16 @@ function subFlow() {
                             message = messagesToSend.newMessage('eligeCita1', senderName, null, null, object);
                             user = new User_1.User(chatId, message, 'eligeCita1');
                             sendMessage(user);
+                            users.push(user);
                         }
                         else {
                             existeAfiliado = false;
                             message = messagesToSend.newMessage('citasSubFlow1', senderName);
                             user = new User_1.User(chatId, message, 'citasSubFlow1');
                             sendMessage(user);
+                            users.push(user);
                         }
                     });
-                    users.push(user);
                 }
             }
             console.log("VALIDACIÓN: " + existeAfiliado);
