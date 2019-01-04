@@ -65,7 +65,7 @@ export class servicioAfiliadoEPS {
           this.tipoDocumento = '';
         }
       });
-      return this.fechaExpedicion;
+      return this.response;
   }
 
   static servicioQuemado(tipo:string, cedula:string){
