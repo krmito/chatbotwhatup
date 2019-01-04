@@ -111,8 +111,8 @@ function subFlow() {
                     //Consultar cédula
                     console.log(input);
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(function (res) {
-                        console.log("BOOLENAO: ", datos);
-                        if (datos != undefined) {
+                        console.log("BOOLENAO: ", datos.responseMessageOut.body.response.consultaAfiliadoResponse);
+                        if (datos.responseMessageOut.body.response.consultaAfiliadoResponse != "") {
                             console.log("Existe");
                             existeAfiliado = true;
                         }
