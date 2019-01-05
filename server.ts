@@ -36,6 +36,7 @@ let DiasDisponibles: Array<string> = [];
 let horasDisponibles: Array<string> = [];
 let arregloDias: Array<any> = [];;
 let existeAfiliado: boolean;
+let correo:string;
 app.use(bodyParser.json());
 
 app.post('/my_webhook_url2', (req, res) => {
@@ -110,17 +111,9 @@ function subFlow() {
             //Ingresa l tipo de documento
             if (user.state == 'citaInicial1') {
                 if (citaInicial2.find(response => utilities.utilities.isContain(input, response))) {
-
-                    
                     message = messagesToSend.newMessage('citaInicial2', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citaInicial2';
-                    user.body = message;
-                    sendMessage(user);
-                }else{
-                    message = messagesToSend.newMessage('eligeCita7', senderName);
-                    user = users.find(userValue => userValue.chatId == chatId);
-                    user.state = 'citaInicial1';
                     user.body = message;
                     sendMessage(user);
                 }
@@ -178,7 +171,8 @@ function subFlow() {
                             let calidadAfiliado = afiliado.calidadAfiliado;
                             let fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             let tipoAfiliado = afiliado.tipoAfiliado;
-                            let object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
+                            correo = afiliado.email;
+                            let object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado, correo: correo };
 
                             console.log("Existe");
                             existeAfiliado = true;
@@ -226,7 +220,7 @@ function subFlow() {
 
                     if (Number(indice2 - 1) == Number(input)) {
 
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, null, correo);
                         user = users.find(userValue => userValue.chatId == chatId);
                         user.state = 'eligeCita3';
                         user.body = message;

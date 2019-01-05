@@ -38,6 +38,7 @@ var horasDisponibles = [];
 var arregloDias = [];
 ;
 var existeAfiliado;
+var correo;
 app.use(bodyParser.json());
 app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
@@ -106,13 +107,6 @@ function subFlow() {
                     user.body = message;
                     sendMessage(user);
                 }
-                else {
-                    message = messagesToSend.newMessage('eligeCita7', senderName);
-                    user = users.find(function (userValue) { return userValue.chatId == chatId; });
-                    user.state = 'citaInicial1';
-                    user.body = message;
-                    sendMessage(user);
-                }
             }
             else if (user.state == 'citaInicial2') {
                 if (tipoDocumento.find(function (response) { return utilities.utilities.isContain(input, response); })) {
@@ -160,7 +154,8 @@ function subFlow() {
                             var calidadAfiliado = afiliado.calidadAfiliado;
                             var fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             var tipoAfiliado = afiliado.tipoAfiliado;
-                            var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
+                            correo = afiliado.email;
+                            var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado, correo: correo };
                             console.log("Existe");
                             existeAfiliado = true;
                             message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate_1, object);
@@ -205,7 +200,7 @@ function subFlow() {
             else if (user.state == 'eligeCita2') {
                 horasDisponibles.forEach(function (element, indice2) {
                     if (Number(indice2 - 1) == Number(input)) {
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1]);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, null, correo);
                         user = users.find(function (userValue) { return userValue.chatId == chatId; });
                         user.state = 'eligeCita3';
                         user.body = message;

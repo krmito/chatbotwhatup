@@ -1,6 +1,6 @@
 
 let messagesToSend = {
-  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string, x?: string, objecto?: any) {
+  newMessage: function (state?: string, userName?: string, dia?: string, hora?: string, x?: string, objecto?: any, correo:string) {
     let mensaje = '';
 
     switch (state) {
@@ -68,7 +68,8 @@ Tu tipo de afilaición ${objecto.tipo}
 `;
         break;
       case 'eligeCita3':
-        mensaje = `${userName} su cita esta para el ${dia} a las ${hora} en la sede principal
+        mensaje = `${userName} su cita esta para el ${dia} a las ${hora} en la sede principal,
+        quieres que te enviemos la información a tu correo: ${correo}
         *1. Ok*
         *2. Cancelar*`;
         break;

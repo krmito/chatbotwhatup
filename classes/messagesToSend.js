@@ -1,6 +1,6 @@
 "use strict";
 var messagesToSend = {
-    newMessage: function (state, userName, dia, hora, x, objecto) {
+    newMessage: function (state, userName, dia, hora, x, objecto, correo) {
         var mensaje = '';
         switch (state) {
             case 'saludoInicial':
@@ -37,7 +37,7 @@ var messagesToSend = {
                 mensaje = userName + " estas son las horas en que tenemos citas disponibles para el " + dia + "\n*1. 8:00* \n*2. 9:00* \n*3. 3:30* \n*4. 4:20* \n*5.Cancelar* \n";
                 break;
             case 'eligeCita3':
-                mensaje = userName + " su cita esta para el " + dia + " a las " + hora + " en la sede principal\n        *1. Ok*\n        *2. Cancelar*";
+                mensaje = userName + " su cita esta para el " + dia + " a las " + hora + " en la sede principal,\n        quieres que te enviemos la informaci\u00F3n a tu correo: " + correo + "\n        *1. Ok*\n        *2. Cancelar*";
                 break;
             case 'eligeCita4':
                 mensaje = "Desea que le mandemos esta informacion a su correo\n        *1. Si*\n        *2. No*";
