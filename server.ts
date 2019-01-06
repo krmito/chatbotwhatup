@@ -171,7 +171,7 @@ function subFlow() {
                             let calidadAfiliado = afiliado.calidadAfiliado;
                             let fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             let tipoAfiliado = afiliado.tipoAfiliado;
-                            //correo = afiliado.email;
+                            correo = afiliado.email;
                             let object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado};
 
                             console.log("Existe");
