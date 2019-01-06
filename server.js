@@ -154,11 +154,12 @@ function subFlow() {
                             var calidadAfiliado = afiliado.calidadAfiliado;
                             var fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             var tipoAfiliado = afiliado.tipoAfiliado;
-                            correo = afiliado.email;
+                            var correos = afiliado.email;
+                            correo = correos;
                             var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
                             console.log("Existe");
                             existeAfiliado = true;
-                            message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate_1, object);
+                            message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate_1, object, correo);
                             user = users.find(function (userValue) { return userValue.chatId == chatId; });
                             user.state = 'eligeCita1';
                             user.body = message;
@@ -183,13 +184,13 @@ function subFlow() {
                     sendMessage(user);
                 }
             }
-            else if (user.state == 'eligeCita1') {
+            else if (user.state == 'eligeCita1' && existeAfiliado) {
                 for (var indices = 0; indices < DiasDisponibles.length; indices++) {
                     console.log('indices', indices);
                     console.log('DiasDisponibles[indices]', DiasDisponibles[indices]);
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices], null, null, null, correo);
                         user = users.find(function (userValue) { return userValue.chatId == chatId; });
                         user.state = 'eligeCita2';
                         user.body = message;
@@ -197,7 +198,7 @@ function subFlow() {
                     }
                 }
             }
-            else if (user.state == 'eligeCita2') {
+            else if (user.state == 'eligeCita2' && existeAfiliado) {
                 horasDisponibles.forEach(function (element, indice2) {
                     if (Number(indice2 - 1) == Number(input)) {
                         message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, correo);
@@ -208,7 +209,7 @@ function subFlow() {
                     }
                 });
             }
-            else if (user.state == 'eligeCita3') {
+            else if (user.state == 'eligeCita3' && existeAfiliado) {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('eligeCita5', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });
@@ -224,7 +225,7 @@ function subFlow() {
                     sendMessage(user);
                 }
             }
-            else if (user.state == 'eligeCita5') {
+            else if (user.state == 'eligeCita5' && existeAfiliado) {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('saludoInicial', senderName);
                     user = users.find(function (userValue) { return userValue.chatId == chatId; });

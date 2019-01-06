@@ -36,7 +36,7 @@ let DiasDisponibles: Array<string> = [];
 let horasDisponibles: Array<string> = [];
 let arregloDias: Array<any> = [];;
 let existeAfiliado: boolean;
-let correo:string;
+let correo: string;
 app.use(bodyParser.json());
 
 app.post('/my_webhook_url2', (req, res) => {
@@ -79,7 +79,7 @@ function checkMessage() {
                 sendMessage(user);
 
             } else if (citaInicial1.find(valueCita => utilities.utilities.isContain(input, valueCita))) {
-                
+
                 message = messagesToSend.newMessage('citaInicial1', senderName);
                 user = users.find(userValue => userValue.chatId == chatId);
                 user.state = 'citaInicial1';
@@ -120,7 +120,7 @@ function subFlow() {
             } else if (user.state == 'citaInicial2') {
                 if (tipoDocumento.find(response => utilities.utilities.isContain(input, response))) {
 
-                    
+
                     message = messagesToSend.newMessage('citasSubFlow1', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citasSubFlow1';
@@ -132,7 +132,7 @@ function subFlow() {
                 if (input.match(/([^a-zA-Z])/g)) {
 
                     documentNumber = parseInt(input);
-                    
+
                     message = messagesToSend.newMessage('citasSubFlow2', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
                     user.state = 'citasSubFlow2';
@@ -158,12 +158,8 @@ function subFlow() {
                     });
 
                     console.log('arregloDias ', arregloDias);
-
-
                     documentDate = input;
-
                     utilities.utilities.functionWithCallBack(consultarServicio("CC", documentNumber), 4000).then(res => {
-
 
                         console.log("BOOLENAO: ", JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse);
                         if (JSON.parse(datos).responseMessageOut.body.response.consultaAfiliadoResponse.afiliado != undefined) {
@@ -171,13 +167,14 @@ function subFlow() {
                             let calidadAfiliado = afiliado.calidadAfiliado;
                             let fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             let tipoAfiliado = afiliado.tipoAfiliado;
-                            correo = afiliado.email;
-                            let object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado};
+                            let correos = afiliado.email;
+                            correo = correos;
+                            let object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
 
                             console.log("Existe");
                             existeAfiliado = true;
 
-                            message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate, object);
+                            message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate, object, correo);
                             user = users.find(userValue => userValue.chatId == chatId);
                             user.state = 'eligeCita1';
                             user.body = message;
@@ -200,7 +197,7 @@ function subFlow() {
                     user.body = message;
                     sendMessage(user);
                 }
-            } else if (user.state == 'eligeCita1') {
+            } else if (user.state == 'eligeCita1' && existeAfiliado) {
 
                 for (let indices = 0; indices < DiasDisponibles.length; indices++) {
                     console.log('indices', indices);
@@ -208,14 +205,14 @@ function subFlow() {
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
 
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices]);
+                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices], null, null,null, correo);
                         user = users.find(userValue => userValue.chatId == chatId);
                         user.state = 'eligeCita2';
                         user.body = message;
                         sendMessage(user);
                     }
                 }
-            } else if (user.state == 'eligeCita2') {
+            } else if (user.state == 'eligeCita2' && existeAfiliado) {
                 horasDisponibles.forEach((element, indice2) => {
 
                     if (Number(indice2 - 1) == Number(input)) {
@@ -228,7 +225,7 @@ function subFlow() {
                     }
 
                 });
-            } else if (user.state == 'eligeCita3') {
+            } else if (user.state == 'eligeCita3' && existeAfiliado) {
 
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('eligeCita5', senderName);
@@ -244,7 +241,7 @@ function subFlow() {
                     sendMessage(user);
                 }
 
-            } else if (user.state == 'eligeCita5') {
+            } else if (user.state == 'eligeCita5' && existeAfiliado) {
                 if (Number(input.match(/([^a-zA-Z])/g)) == 1) {
                     message = messagesToSend.newMessage('saludoInicial', senderName);
                     user = users.find(userValue => userValue.chatId == chatId);
