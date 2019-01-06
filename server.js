@@ -39,6 +39,7 @@ var arregloDias = [];
 ;
 var existeAfiliado;
 var correo;
+var diaElegido;
 app.use(bodyParser.json());
 app.post('/my_webhook_url2', function (req, res) {
     data = req.body; // New messages in the "body" variable
@@ -190,7 +191,8 @@ function subFlow() {
                     console.log('DiasDisponibles[indices]', DiasDisponibles[indices]);
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices], null, null, null, correo);
+                        diaElegido = DiasDisponibles[indices];
+                        message = messagesToSend.newMessage('eligeCita2', senderName, diaElegido, null, null, null, correo);
                         user = users.find(function (userValue) { return userValue.chatId == chatId; });
                         user.state = 'eligeCita2';
                         user.body = message;
@@ -201,7 +203,7 @@ function subFlow() {
             else if (user.state == 'eligeCita2' && existeAfiliado) {
                 horasDisponibles.forEach(function (element, indice2) {
                     if (Number(indice2 - 1) == Number(input)) {
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, correo);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, diaElegido, horasDisponibles[indice2 - 1], null, null, correo);
                         user = users.find(function (userValue) { return userValue.chatId == chatId; });
                         user.state = 'eligeCita3';
                         user.body = message;

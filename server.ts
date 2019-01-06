@@ -37,6 +37,8 @@ let horasDisponibles: Array<string> = [];
 let arregloDias: Array<any> = [];;
 let existeAfiliado: boolean;
 let correo: string;
+let diaElegido:string;
+
 app.use(bodyParser.json());
 
 app.post('/my_webhook_url2', (req, res) => {
@@ -204,8 +206,8 @@ function subFlow() {
                     console.log('DiasDisponibles[indices]', DiasDisponibles[indices]);
                     if (Number(indices) == Number(input)) {
                         console.log("ENTRÓÓÓÓÓÓÓÓÓÓÓ");
-
-                        message = messagesToSend.newMessage('eligeCita2', senderName, DiasDisponibles[indices], null, null,null, correo);
+                        diaElegido = DiasDisponibles[indices];
+                        message = messagesToSend.newMessage('eligeCita2', senderName, diaElegido, null, null,null, correo);
                         user = users.find(userValue => userValue.chatId == chatId);
                         user.state = 'eligeCita2';
                         user.body = message;
@@ -217,7 +219,7 @@ function subFlow() {
 
                     if (Number(indice2 - 1) == Number(input)) {
 
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, correo);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, diaElegido, horasDisponibles[indice2 - 1], null, null, correo);
                         user = users.find(userValue => userValue.chatId == chatId);
                         user.state = 'eligeCita3';
                         user.body = message;
