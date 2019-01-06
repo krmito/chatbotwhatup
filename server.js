@@ -200,7 +200,7 @@ function subFlow() {
             else if (user.state == 'eligeCita2') {
                 horasDisponibles.forEach(function (element, indice2) {
                     if (Number(indice2 - 1) == Number(input)) {
-                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, null, correo);
+                        message = messagesToSend.newMessage('eligeCita3', senderName, null, horasDisponibles[indice2 - 1], null, null, correo);
                         user = users.find(function (userValue) { return userValue.chatId == chatId; });
                         user.state = 'eligeCita3';
                         user.body = message;
