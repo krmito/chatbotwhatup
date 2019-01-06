@@ -9,7 +9,7 @@ var utilities = require("./classes/utilities");
 var servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 /* let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS"); */
 var app = express();
-var url = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
+var url = 'https://eu17.chat-api.com/instance20731/message?token=fyjnhn48zfqfz3p0';
 var users = [];
 var user;
 var data;

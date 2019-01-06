@@ -8,7 +8,7 @@ import servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS");
 /* let servicioAfiliadoEPS = require("./services/consultaAfiliadoEPS"); */
 
 let app = express();
-let url: string = 'https://eu17.chat-api.com/instance20416/message?token=cd5k6c9y2tynp1wa';
+let url: string = 'https://eu17.chat-api.com/instance20731/message?token=fyjnhn48zfqfz3p0';
 let users: Array<any> = [];
 let user: User;
 let data: any;
