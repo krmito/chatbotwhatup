@@ -155,7 +155,7 @@ function subFlow() {
                             var fechaAfiliacion = afiliado.fechaAfiliacionSistema;
                             var tipoAfiliado = afiliado.tipoAfiliado;
                             correo = afiliado.email;
-                            var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado, correo: correo };
+                            var object = { calidad: calidadAfiliado, fecha: fechaAfiliacion, tipo: tipoAfiliado };
                             console.log("Existe");
                             existeAfiliado = true;
                             message = messagesToSend.newMessage('eligeCita1', senderName, '', '', availableDate_1, object);
